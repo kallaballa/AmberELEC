@@ -10,4 +10,4 @@ PKG_URL="${PKG_SITE}.git"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="A set of tools to trace, replay, and inspect OpenGL calls"
 
-PKG_CMAKE_OPTS_TARGET="-DENABLE_GUI=false -DENABLE_X11=false"
+PKG_CMAKE_OPTS_TARGET="-DENABLE_GUI=false -DENABLE_X11=false -DBUILD_TESTING=false"

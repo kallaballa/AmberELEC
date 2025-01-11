@@ -10,6 +10,7 @@ PKG_URL="${PKG_SITE}.git"
 PKG_DEPENDS_TARGET="toolchain zlib flac sqlite expat"
 PKG_LONGDESC="MAME - Multiple Arcade Machine Emulator"
 PKG_TOOLCHAIN="make"
+PKG_GIT_CLONE_SINGLE=yes
 
 PKG_MAKE_OPTS_TARGET="REGENIE=1 \
                       VERBOSE=1 \

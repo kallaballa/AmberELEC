@@ -9,6 +9,7 @@ PKG_URL="${PKG_SITE}.git"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="SAME_CDI is a Single Arcade/Machine Emulator for libretro"
 PKG_TOOLCHAIN="make"
+PKG_GIT_CLONE_SINGLE=yes
 
 PKG_MAKE_OPTS_TARGET="REGENIE=1 \
                       VERBOSE=1 \

@@ -357,21 +357,21 @@ function platform_tinker() {
 function platform_x86() {
     __default_cflags="-O2 -march=native"
     __default_asflags=""
-    __default_makeflags="-j$(nproc)"
+    __default_makeflags="-j4"
     __platform_flags="x11 gl"
 }
 
 function platform_generic-x11() {
     __default_cflags="-O2"
     __default_asflags=""
-    __default_makeflags="-j$(nproc)"
+    __default_makeflags="-j4"
     __platform_flags="x11 gl"
 }
 
 function platform_armv7-mali() {
     __default_cflags="-O2 -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
     __default_asflags=""
-    __default_makeflags="-j$(nproc)"
+    __default_makeflags="-j4"
     __platform_flags="arm armv7 neon mali gles"
 }
 

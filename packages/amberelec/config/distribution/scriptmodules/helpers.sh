@@ -357,7 +357,7 @@ function gitPullOrClone() {
         pushd "$dir" > /dev/null
         runCmd git checkout "$branch"
         runCmd git pull
-        runCmd git submodule update --init --recursive
+        seq 0 9 | while read i; do runCmd flock -w 100000 /tmp/git_get.lock git submodule update --init --recursive; if [ -d "${PACKAGE}" ]; break; fi; sleep 60; done
         popd > /dev/null
     else
         local git="git clone --recursive"
@@ -366,7 +366,7 @@ function gitPullOrClone() {
         fi
         [[ "$branch" != "master" ]] && git+=" --branch $branch"
         printMsgs "console" "$git \"$repo\" \"$dir\""
-        runCmd $git "$repo" "$dir"
+        seq 0 9 | while read i; do runCmd flock -w 100000 /tmp/git_get.lock $git "$repo" "$dir"; if [ -d "${PACKAGE}" ]; break; fi; sleep 60; done
     fi
 
     if [[ -n "$commit" ]]; then

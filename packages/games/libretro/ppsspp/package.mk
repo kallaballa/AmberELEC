@@ -10,6 +10,7 @@ PKG_URL="https://github.com/hrydgard/ppsspp.git"
 PKG_DEPENDS_TARGET="toolchain SDL2 ffmpeg libzip zstd"
 PKG_LONGDESC="A PSP emulator for Android, Windows, Mac, Linux and Blackberry 10, written in C++."
 PKG_TOOLCHAIN="cmake-make"
+PKG_GIT_CLONE_SINGLE=yes
 
 pre_configure_target() {
   sed -i 's/\-O[23]//' ${PKG_BUILD}/CMakeLists.txt

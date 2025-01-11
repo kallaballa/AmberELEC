@@ -9,6 +9,7 @@ PKG_URL="${PKG_SITE}.git"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="ARM 32bit bundles for aarch64"
 PKG_TOOLCHAIN="manual"
+PKG_GIT_CLONE_SINGLE=yes
 
 makeinstall_target() {
   mkdir -p ${INSTALL}/usr/lib32

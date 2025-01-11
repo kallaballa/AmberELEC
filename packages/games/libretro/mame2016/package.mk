@@ -9,6 +9,7 @@ PKG_URL="${PKG_SITE}.git"
 PKG_DEPENDS_TARGET="toolchain linux glibc alsa-lib"
 PKG_LONGDESC="Late 2016 version of MAME (0.174) for libretro. Compatible with MAME 0.174 romsets."
 PKG_TOOLCHAIN="make"
+PKG_GIT_CLONE_SINGLE=yes
 
 PKG_MAKE_OPTS_TARGET="REGENIE=1 \
                       VERBOSE=1 \

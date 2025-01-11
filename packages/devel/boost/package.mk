@@ -4,10 +4,10 @@
 
 PKG_NAME="boost"
 PKG_VERSION="1.82.0"
-PKG_SHA256="a6e1ab9b0860e6a2881dd7b21fe9f737a095e5f33a3a874afc6a345228597ee6"
+PKG_SHA256="b62bd839ea6c28265af9a1f68393eda37fab3611425d3b28882d8e424535ec9d"
 PKG_LICENSE="OSS"
 PKG_SITE="https://www.boost.org/"
-PKG_URL="https://boostorg.jfrog.io/artifactory/main/release/${PKG_VERSION}/source/${PKG_NAME}_${PKG_VERSION//./_}.tar.bz2"
+PKG_URL="https://github.com/boostorg/boost/releases/download/boost-1.82.0/boost-1.82.0.tar.gz"
 PKG_DEPENDS_HOST="toolchain:host"
 PKG_DEPENDS_TARGET="toolchain boost:host Python3 zlib bzip2"
 PKG_LONGDESC="boost: Peer-reviewed STL style libraries for C++"
@@ -15,7 +15,7 @@ PKG_TOOLCHAIN="manual"
 PKG_BUILD_FLAGS="+pic"
 
 make_host() {
-  cd tools/build/src/engine
+  cd ../tools/build/src/engine
     sh build.sh
 }
 
@@ -30,18 +30,20 @@ pre_configure_target() {
 }
 
 configure_target() {
-  sh bootstrap.sh --prefix=/usr \
+  sh ../bootstrap.sh --prefix=/usr \
                   --with-bjam=${TOOLCHAIN}/bin/b2 \
                   --with-python=${TOOLCHAIN}/bin/python \
                   --with-python-root=${SYSROOT_PREFIX}/usr
 
-  echo "using gcc : $(${CC} -v 2>&1  | tail -n 1 |awk '{print $3}') : ${CC}  : <compileflags>\"${CFLAGS}\" <linkflags>\"${LDFLAGS}\" ;" \
-    > tools/build/src/user-config.jam
+echo "using gcc : $(${CC} -v 2>&1  | tail -n 1 |awk '{print $3}') : ${CC}  : <compileflags>\"${CFLAGS}\" <linkflags>\"${LDFLAGS}\" ;" \
+    > ../tools/build/src/user-config.jam
+
   echo "using python : ${PKG_PYTHON_VERSION/#python} : ${TOOLCHAIN} : ${SYSROOT_PREFIX}/usr/include : ${SYSROOT_PREFIX}/usr/lib ;" \
-    >> tools/build/src/user-config.jam
+    >> ../tools/build/src/user-config.jam
 }
 
 makeinstall_target() {
+  cd ..
   ${TOOLCHAIN}/bin/b2 -d2 --ignore-site-config \
                       --layout=system \
                       --prefix=${SYSROOT_PREFIX}/usr \
