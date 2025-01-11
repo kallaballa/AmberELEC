@@ -103,12 +103,18 @@ for d in "${SOURCES}/${1}/${1}-"* ; do
           # NOTE: we run the submodule update twice if the clone already
           #       exists - but deduplicating would complicate the logic quite a lot and
           #       the second time is almost a no-op
-          if ! git pull || ! git submodule update --init --recursive ${GIT_SUBMODULE_PARAMS}; then
+          seq 0 9 | while read i; do 
+            if ! git pull || ! flock -w 100000 /tmp/git_get.lock git submodule update --init --recursive ${GIT_SUBMODULE_PARAMS}; then
               cd "${opwd}"
               build_msg "CLR_CLEAN" "DELETE" "(${d})"
               GIT_FOUND=NO
               rm -rf "${d}"
-          fi
+            fi
+            if [ -d "${PACKAGE}" ]; then 
+              break; 
+            fi
+	    sleep 60;
+          done
           cd "${opwd}"
         fi
       else
@@ -126,7 +132,7 @@ cd "${opwd}"
 
 if [ "${GIT_FOUND}" = "no" ]; then
   build_msg "CLR_GET" "GIT CLONE" "${1}"
-  git clone ${GIT_CLONE_PARAMS} "${PKG_URL}" "${PACKAGE}"
+  seq 0 9 | while read i; do flock -w 100000 /tmp/git_get.lock git clone ${GIT_CLONE_PARAMS} "${PKG_URL}" "${PACKAGE}"; if [ -d "${PACKAGE}" ]; then break; fi; sleep 60; done
 elif [ ! "${GIT_DIR}" = "${PACKAGE}" ]; then
   mv "${GIT_DIR}" "${PACKAGE}"
 fi
@@ -135,7 +141,7 @@ fi
   [ $(git log --oneline --pretty=tformat:"%H" | grep "^${PKG_VERSION}" | wc -l) -eq 1 ] || die "There is no commit '${PKG_VERSION}' on branch '$(git branch | grep ^\* | cut -d ' ' -f2)' of package '${1}'! Aborting!"
   git reset --hard "${PKG_VERSION}"
   build_msg "CLR_GET" "GIT SUBMODULE" "${1}"
-  git submodule update --init --recursive ${GIT_SUBMODULE_PARAMS}
+  seq 0 9 | while read i; do flock -w 100000 /tmp/git_get.lock git submodule update --init --recursive ${GIT_SUBMODULE_PARAMS}; if [ -d "${PACKAGE}" ]; then break; fi; sleep 60; done
 )
 
 GIT_SHA="$(git ls-remote "${PACKAGE}" | grep -m1 HEAD | awk '{print $1;}')"
