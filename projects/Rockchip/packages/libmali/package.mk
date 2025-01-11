@@ -9,7 +9,7 @@ PKG_ARCH="arm aarch64"
 PKG_LICENSE="nonfree"
 PKG_SITE="https://github.com/AmberELEC/libmali"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain libdrm"
+PKG_DEPENDS_TARGET="toolchain libdrm libX11"
 PKG_LONGDESC="The Mali GPU library used in Rockchip Platform"
 
 PKG_PATCH_DIRS="${MALI_FAMILY}"
@@ -26,7 +26,7 @@ post_makeinstall_target() {
 	fi
 
 	if [ "${MALI_FAMILY}" == "g31" ]; then
-		BLOB="libmali-bifrost-g31-r13p0-gbm.so"
+		BLOB="libmali-bifrost-g31-g2p0-x11.so"
 	elif [ "${MALI_FAMILY}" == "t86x" ]; then
 		BLOB="libmali-midgard-t86x-r18p0-gbm.so"
 	fi

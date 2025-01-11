@@ -8,10 +8,10 @@ diff -rupN libmali.orig/meson.build libmali.new/meson.build
 -gpu = get_option('gpu')
 -version = get_option('version')
 +gpu = 'bifrost-g31'
-+version = 'r13p0'
++version = 'g2p0'
  subversion = get_option('subversion')
 -platform = get_option('platform')
-+platform = 'gbm'
++platform = 'x11'
  opencl_icd = get_option('opencl-icd')
  vendor_package = get_option('vendor-package')
  wrapper_packages = get_option('wrapper-packages')
