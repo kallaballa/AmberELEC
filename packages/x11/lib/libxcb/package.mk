@@ -19,7 +19,7 @@ PKG_CONFIGURE_OPTS_TARGET="--enable-static \
                            --disable-xvmc"
 
 pre_configure_target() {
-  find ${SYSROOT_PREFIX}/usr/lib/${PKG_PYTHON_VERSION} -name align.py | xargs sed -i 's/from fractions import gcd/from maths import gcd/g'
+  find ${SYSROOT_PREFIX}/usr/lib/${PKG_PYTHON_VERSION} -name align.py | xargs sed -i 's/from fractions import gcd/from math import gcd/g'
   PYTHON_LIBDIR=${SYSROOT_PREFIX}/usr/lib/${PKG_PYTHON_VERSION}
   PYTHON_TOOLCHAIN_PATH=${PYTHON_LIBDIR}/site-packages
 

@@ -8,12 +8,13 @@ PKG_VERSION="3.0.18"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.videolan.org"
 PKG_URL="https://mirror.netcologne.de/videolan.org/${PKG_NAME}/${PKG_VERSION}/${PKG_NAME}-${PKG_VERSION}.tar.xz"
-PKG_DEPENDS_TARGET="toolchain gnutls ffmpeg libmpeg2 zlib flac libvorbis libxml2 pulseaudio SDL2 x264 aom libogg librga ${OPENGLES} xorgproto"
+PKG_DEPENDS_TARGET="toolchain gnutls ffmpeg libmpeg2 zlib flac libvorbis libxml2 pulseaudio SDL2 x264 aom libogg libdrm librga ${OPENGLES} wayland"
 PKG_SHORTDESC="VideoLAN multimedia player and streamer"
 PKG_LONGDESC="VLC is the VideoLAN project's media player. It plays MPEG, MPEG2, MPEG4, DivX, MOV, WMV, QuickTime, mp3, Ogg/Vorbis files, DVDs, VCDs, and multimedia streams from various network sources."
 
 
-ENABLED_FEATURES="--enable-silent-rules \
+ENABLED_FEATURES="--enable-wayland \
+            --enable-silent-rules \
             --enable-run-as-root \
             --enable-sout \
             --enable-vlm \
@@ -126,6 +127,7 @@ PKG_CONFIGURE_OPTS_TARGET="${ENABLED_FEATURES} ${DISABLED_FEATURES}"
 pre_configure_target() {
   export LDFLAGS="${LDFLAGS} -lresolv -fopenmp -lm"
   export PKG_CONFIG_PATH="${SYSROOT_PREFIX}/usr/lib/pkgconfig/; ${SYSROOT_PREFIX}/usr/share/pkgconfig/;"
+  mkdir -p "${PKG_REAL_BUILD}"/modules/video_output/wayland
 }
 
 post_makeinstall_target() {

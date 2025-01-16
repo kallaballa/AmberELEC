@@ -8,7 +8,7 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="https://www.libsdl.org/"
 PKG_URL="https://github.com/libsdl-org/SDL-1.2/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain yasm:host alsa-lib systemd dbus"
+PKG_DEPENDS_TARGET="toolchain yasm:host alsa-lib systemd dbus wayland"
 PKG_SECTION="multimedia"
 PKG_SHORTDESC="SDL: A cross-platform Graphic API"
 PKG_LONGDESC="Simple DirectMedia Layer is a cross-platform multimedia library designed to provide fast access to the graphics framebuffer and audio device. It is used by MPEG playback software, emulators, and many popular games, including the award winning Linux port of 'Civilization: Call To Power.' Simple DirectMedia Layer supports Linux, Win32, BeOS, MacOS, Solaris, IRIX, and FreeBSD."
@@ -45,7 +45,7 @@ PKG_CONFIGURE_OPTS_TARGET="--enable-shared \
                            --disable-sndio --enable-sndio-shared \
                            --disable-diskaudio \
                            --disable-dummyaudio \
-                           --disable-video-wayland --enable-video-wayland-qt-touch --disable-wayland-shared \
+                           --enable-video-wayland --enable-video-wayland-qt-touch --enable-wayland-shared \
                            --disable-video-mir --disable-mir-shared \
                            --disable-video-cocoa \
                            --enable-video-directfb --enable-directfb-shared \
@@ -77,11 +77,11 @@ PKG_CONFIGURE_OPTS_HOST="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-x11-vm --w
 
 
 if [ ! "${OPENGL}" = "no" ]; then
-  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} ${OPENGL} glu"
+  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} ${OPENGL}"
 
-  PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --enable-video-opengl --disable-video-opengles"
+  PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --enable-video-opengl --enable-video-opengles --disable-video-fbcon"
 else
-  PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-opengl --enable-video-opengles --enable-video-fbcon"
+  PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-opengl --enable-video-opengles --disable-video-fbcon"
 fi
 
 if [ "${PULSEAUDIO_SUPPORT}" = yes ]; then

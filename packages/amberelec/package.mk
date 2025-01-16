@@ -6,7 +6,7 @@
 PKG_NAME="amberelec"
 PKG_VERSION="1.0"
 PKG_LICENSE="GPLv3"
-PKG_DEPENDS_TARGET="toolchain ${OPENGLES} emulationstation retroarch retrorun klbi lib32"
+PKG_DEPENDS_TARGET="toolchain ${OPENGLES} emulationstation retroarch retrorun klbi lib32 glfw"
 PKG_LONGDESC="AmberELEC Meta Package"
 PKG_TOOLCHAIN="make"
 
@@ -16,8 +16,8 @@ then
 else
 # REMOVED sameboy
   LIBRETRO_CORES="81 a5200 arduous atari800 beetle-gba beetle-lynx beetle-ngp beetle-pce beetle-pce-fast beetle-pcfx beetle-supafaust beetle-supergrafx beetle-vb beetle-wswan bluemsx cap32 crocods \
-                  doublecherrygb dosbox-core dosbox-pure easyrpg emuscv ep128emu fake08 fbalpha2012 fbalpha2019 fbneo fceumm flycast flycast2021 fmsx freechaf freeintv freej2me fuse-libretro gambatte \
-                  gearboy gearcoleco gearsystem genesis-plus-gx genesis-plus-gx-wide gpsp gw-libretro handy hatari jaxe lowresnx mame mame2000 mame2003-plus mame2010 mame2015 mame2016 meowpc98 mgba mojozork \
+                  doublecherrygb dosbox-core dosbox-pure easyrpg ep128emu fake08 fbalpha2012 fbalpha2019 fbneo fceumm flycast flycast2021 fmsx freechaf freeintv freej2me fuse-libretro gambatte \
+                  gearboy gearcoleco gearsystem genesis-plus-gx genesis-plus-gx-wide gpsp gw-libretro handy hatari jaxe lowresnx mame2000 mame2003-plus mame2010 mame2015 mame2016 meowpc98 mgba mojozork \
                   mupen64plus-nx neocd_libretro nestopia np2kai o2em opera parallel-n64 pcsx_rearmed picodrive pokemini potator ppsspp prboom prosystem puae puae2021 px68k quasi88 quicknes race same_cdi \
                   sameduck scummvm smsplus-gx snes9x snes9x2002 snes9x2005_plus snes9x2010 stella stella-2014 swanstation tgbdual theodore tic-80 uae4arm uw8 uzem vbam vba-next vecx vice vircon32 \
                   virtualjaguar wasm4 xmil"

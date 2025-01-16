@@ -3,8 +3,8 @@
 # Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="glibc"
-PKG_VERSION="2.38"
-PKG_SHA256="fb82998998b2b29965467bc1b69d152e9c307d2cf301c9eafb4555b770ef3fd2"
+PKG_VERSION="2.39"
+PKG_SHA256="f77bd47cf8170c57365ae7bf86696c118adb3b120d3259c64c502d3dc1e2d926"
 PKG_LICENSE="GPL"
 PKG_SITE="https://www.gnu.org/software/libc/"
 PKG_URL="https://ftp.gnu.org/pub/gnu/glibc/${PKG_NAME}-${PKG_VERSION}.tar.xz"
@@ -13,10 +13,13 @@ PKG_DEPENDS_INIT="glibc"
 PKG_LONGDESC="The Glibc package contains the main C library."
 PKG_BUILD_FLAGS="+bfd"
 
+PKG_CONFIGURE_OPTS_HOST="--enable-crypt"
+
 PKG_CONFIGURE_OPTS_TARGET="BASH_SHELL=/bin/sh \
                            ac_cv_path_PERL=no \
                            ac_cv_prog_MAKEINFO= \
-                           --libexecdir=/usr/lib/glibc \
+                           --enable-crypt \
+			   --libexecdir=/usr/lib/glibc \
                            --cache-file=config.cache \
                            --disable-profile \
                            --disable-sanity-checks \

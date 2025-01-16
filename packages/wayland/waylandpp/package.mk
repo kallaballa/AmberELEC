@@ -1,9 +1,9 @@
-# SPDX-License-Identifier: GPL-2.0
+ SPDX-License-Identifier: GPL-2.0
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="waylandpp"
-PKG_VERSION="0.1.6"
-PKG_SHA256="33d3ec385704c5545fb50d2283aabf4ef26aaaf3e416b292e650fea67c430d23"
+PKG_VERSION="1.0.0"
+PKG_SHA256="b20b45917382c6b87e9380130c9a1a1c563da2f498de5830df12fbce326dd9f5"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/NilsBrause/waylandpp"
 PKG_URL="https://github.com/NilsBrause/waylandpp/archive/${PKG_VERSION}.tar.gz"

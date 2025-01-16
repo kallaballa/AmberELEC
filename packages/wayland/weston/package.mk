@@ -2,33 +2,15 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="weston"
-PKG_VERSION="3.0.0"
-PKG_SHA256="cde1d55e8dd70c3cbb3d1ec72f60e60000041579caa1d6a262bd9c35e93723a5"
+PKG_VERSION="14.0.1"
+PKG_SHA256="a8150505b126a59df781fe8c30c8e6f87da7013e179039eb844a5bbbcc7c79b3"
 PKG_LICENSE="OSS"
 PKG_SITE="https://wayland.freedesktop.org/"
-PKG_URL="https://wayland.freedesktop.org/releases/${PKG_NAME}-${PKG_VERSION}.tar.xz"
-PKG_DEPENDS_TARGET="toolchain wayland-protocols libdrm libxkbcommon libinput cairo libjpeg-turbo dbus"
+PKG_URL="https://gitlab.freedesktop.org/wayland/weston/-/releases/14.0.1/downloads/${PKG_NAME}-${PKG_VERSION}.tar.xz"
+PKG_DEPENDS_TARGET="toolchain wayland-protocols libdrm libxkbcommon libinput cairo linux-pam libjpeg-turbo dbus libseat hwdata libxcb libXcursor libdisplay-info"
 PKG_LONGDESC="Reference implementation of a Wayland compositor"
-
-PKG_CONFIGURE_OPTS_TARGET="CFLAGS=-DMESA_EGL_NO_X11_HEADERS \
-                           LIBS=-lturbojpeg \
-                           --with-cairo-glesv2 \
-                           --disable-xwayland \
-                           --disable-x11-compositor \
-                           --disable-xwayland-test \
-                           --disable-libunwind \
-                           --disable-colord \
-                           --disable-ivi-shell \
-                           --disable-fbdev-compositor \
-                           --disable-rdp-compositor \
-                           --disable-screen-sharing \
-                           --disable-vaapi-recorder \
-                           --disable-headless-compositor \
-                           --enable-systemd-login \
-                           --disable-weston-launch \
-                           --disable-fullscreen-shell \
-                           --disable-demo-clients-install \
-                           --enable-systemd-notify"
+PKG_TOOLCHAIN="meson"
+PKG_MESON_OPTS_TARGET="-Dcolor-management-lcms=false -Dbackend-drm-screencast-vaapi=false -Dbackend-pipewire=false -Dbackend-vnc=false -Dbackend-x11=false -Dbackend-default=drm -Dremoting=false -Dpipewire=false -Dbackend-rdp=false -Ddoc=false -Ddemo-clients=false -Dtests=false -Drenderer-gl=false -Dsimple-clients=damage,im,shm,touch,dmabuf-v4l"
 
 post_makeinstall_target() {
   mkdir -p ${INSTALL}/usr/lib/weston

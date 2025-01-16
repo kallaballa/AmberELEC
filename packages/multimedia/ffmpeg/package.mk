@@ -8,7 +8,7 @@ PKG_SHA256="eadbad9e9ab30b25f5520fbfde99fae4a92a1ae3c0257a8d68569a4651e30e02"
 PKG_LICENSE="GPL-3.0-only"
 PKG_SITE="https://ffmpeg.org"
 PKG_URL="http://ffmpeg.org/releases/ffmpeg-${PKG_VERSION}.tar.xz"
-PKG_DEPENDS_TARGET="toolchain zlib bzip2 openssl speex"
+PKG_DEPENDS_TARGET="toolchain zlib bzip2 openssl speex rkmpp libdrm rkmpp"
 PKG_LONGDESC="FFmpeg is a complete, cross-platform solution to record, convert and stream audio and video."
 PKG_PATCH_DIRS="libreelec v4l2-request v4l2-drmprime"
 
@@ -19,10 +19,9 @@ post_unpack() {
 # Dependencies
 get_graphicdrivers
 
-PKG_FFMPEG_HWACCEL="--enable-hwaccels"
+PKG_FFMPEG_HWACCEL="--enable-hwaccels --enable-rkmpp"
 
 if [ "${V4L2_SUPPORT}" = "yes" ]; then
-  PKG_DEPENDS_TARGET+=" libdrm"
   PKG_NEED_UNPACK+=" $(get_pkg_directory libdrm)"
   PKG_FFMPEG_V4L2="--enable-v4l2_m2m --enable-libdrm"
 

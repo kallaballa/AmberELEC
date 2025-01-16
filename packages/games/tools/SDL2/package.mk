@@ -6,11 +6,11 @@ PKG_VERSION="2.30.4"
 PKG_LICENSE="GPL"
 PKG_SITE="https://www.libsdl.org/"
 PKG_URL="https://www.libsdl.org/release/SDL2-${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain alsa-lib systemd dbus ${OPENGLES} pulseaudio libsamplerate"
+PKG_DEPENDS_TARGET="toolchain alsa-lib systemd dbus ${OPENGLES} pulseaudio libsamplerate wayland"
 PKG_DEPENDS_HOST="toolchain:host distutilscross:host"
 PKG_LONGDESC="Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware."
 
-PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} libdrm ${OPENGLES} librga"
+PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} mesa ${OPENGLES} librga"
 
 if [ "${DEVICE}" = "RG351P" ] || [ "${DEVICE}" = "RG552" ]; then
   PKG_PATCH_DIRS="rotation"
@@ -41,9 +41,9 @@ pre_configure_target(){
                          -DSDL_SNDIO=OFF \
                          -DSDL_DISKAUDIO=OFF \
                          -DSDL_DUMMYAUDIO=OFF \
-                         -DSDL_WAYLAND=OFF \
-                         -DSDL_WAYLAND_QT_TOUCH=OFF \
-                         -DSDL_WAYLAND_SHARED=OFF \
+                         -DSDL_WAYLAND=ON \
+                         -DSDL_WAYLAND_QT_TOUCH=ON \
+                         -DSDL_WAYLAND_SHARED=ON \
                          -DSDL_COCOA=OFF \
                          -DSDL_DIRECTFB=OFF \
                          -DSDL_VIVANTE=OFF \
@@ -59,8 +59,9 @@ pre_configure_target(){
                          -DSDL_RENDER_D3D=OFF \
                          -DSDL_X11=OFF \
                          -DSDL_OPENGLES=ON \
+			 -DSDL_OPENGL=ON \
                          -DSDL_VULKAN=OFF \
-                         -DSDL_KMSDRM=ON \
+                         -DSDL_KMSDRM=OFF \
                          -DSDL_PULSEAUDIO=ON"
   export LDFLAGS="${LDFLAGS} -lrga"
 }

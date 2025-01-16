@@ -19,6 +19,38 @@ PKG_CONFIGURE_OPTS_TARGET="--disable-prelude \
 	--libdir=/lib"
 
 
+pre_configure_host() {
+  cat > "${SYSROOT_PREFIX}"/usr/lib/pkgconfig/pam.pc << EOF
+libdir=${TOOLCHAIN}/lib
+includedir=${TOOLCHAIN}//include
+
+Name: PAM
+Description: The primary Linux-PAM library. It is used by PAM modules and PAM-aware applications.
+URL: http://www.linux-pam.org/
+Version: 1.5.2
+Cflags: -I${TOOLCHAIN}/include
+Libs: -L${TOOLCHAIN}/lib -lpam
+EOF
+}
+
+pre_configure_target() {
+  cat > "${SYSROOT_PREFIX}"/usr/lib/pkgconfig/pam.pc << EOF
+libdir=${TOOLCHAIN}/lib
+includedir=${TOOLCHAIN}//include
+
+Name: PAM
+Description: The primary Linux-PAM library. It is used by PAM modules and PAM-aware applications.
+URL: http://www.linux-pam.org/
+Version: 1.5.2
+Cflags: -I${TOOLCHAIN}/include
+Libs: -L${TOOLCHAIN}/lib -lpam
+EOF
+}
+
+post_makeinstall_bootstrap() {
+  cp "${TOOLCHAIN}"/lib/pkgconfig/pam.pc  ${TOOLCHAIN}/aarch64-libreelec-linux-gnueabi/sysroot/usr/lib/pkgconfig/pam.pc
+}
+
 makeinstall_target() {
   mkdir -p ${INSTALL}/etc/pam.d
   cp ${PKG_DIR}/pam.d/* ${INSTALL}/etc/pam.d

@@ -4,7 +4,7 @@
 # Copyright (C) 2022-present AmberELEC (https://github.com/AmberELEC)
 
 PKG_NAME="gcc"
-PKG_VERSION="13.3.0"
+PKG_VERSION="13.2.0"
 PKG_LICENSE="GPL-2.0-or-later"
 PKG_SITE="https://gcc.gnu.org/"
 PKG_URL="https://ftpmirror.gnu.org/gcc/${PKG_NAME}-${PKG_VERSION}/${PKG_NAME}-${PKG_VERSION}.tar.xz"
@@ -41,7 +41,8 @@ GCC_COMMON_CONFIGURE_OPTS="--target=${TARGET_NAME} \
                            --enable-checking=release \
                            --without-ppl \
                            --without-cloog \
-                           --disable-libada \
+                           --disable-libsanitizer \
+			   --disable-libada \
                            --disable-libmudflap \
                            --disable-libitm \
                            --disable-libquadmath \
@@ -68,6 +69,7 @@ PKG_CONFIGURE_OPTS_HOST="${GCC_COMMON_CONFIGURE_OPTS} \
                          ${OPTS_LIBATOMIC} \
                          --enable-decimal-float \
                          --enable-tls \
+			 --disable-libsanitizer \
                          --enable-shared \
                          --disable-static \
                          --enable-c99 \

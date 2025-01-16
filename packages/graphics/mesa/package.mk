@@ -8,7 +8,7 @@ PKG_SHA256="97c9f6a6127bee5ab21c3fe63ff3e0bd73a7966415f92f66500b0b276b7150da"
 PKG_LICENSE="OSS"
 PKG_SITE="http://www.mesa3d.org/"
 PKG_URL="https://github.com/mesa3d/mesa/archive/mesa-${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain expat libdrm Mako:host"
+PKG_DEPENDS_TARGET="toolchain expat wayland Mako:host"
 PKG_LONGDESC="Mesa is a 3-D graphics library with an API."
 PKG_TOOLCHAIN="manual"
 PKG_BUILD_FLAGS="+lto"
@@ -34,7 +34,10 @@ PKG_MESON_OPTS_TARGET="-Ddri-drivers=${DRI_DRIVERS// /,} \
                        -Dlmsensors=false \
                        -Dbuild-tests=false \
                        -Dselinux=false \
-                       -Dosmesa=none"
+                       -Dosmesa=none \
+		       -Dgles2=true" \
+		       -Dplatforms=wayland
+			
 
 if [ "${DISPLAYSERVER}" = "x11" ]; then
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr"

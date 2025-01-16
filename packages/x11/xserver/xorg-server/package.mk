@@ -26,7 +26,7 @@ if [ ! "${OPENGL}" = "no" ]; then
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} ${OPENGL} libepoxy"
   XORG_MESA="--enable-glx --enable-dri --enable-glamor"
 else
-  XORG_MESA="--disable-glx --disable-dri --disable-glamor"
+  XORG_MESA="--disable-glx --disable-dri --disable-glamor -disable-gl"
 fi
 
 PKG_CONFIGURE_OPTS_TARGET="--disable-debug \

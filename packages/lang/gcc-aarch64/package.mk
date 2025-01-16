@@ -3,7 +3,7 @@
 # Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="gcc-aarch64"
-PKG_VERSION="$(get_pkg_version gcc)"
+PKG_VERSION="13.2.0"
 PKG_LICENSE="GPL-2.0-or-later"
 PKG_URL=""
 PKG_DEPENDS_HOST="toolchain:host ccache:host autoconf:host binutils-aarch64:host gmp:host mpfr:host mpc:host zstd:host"
