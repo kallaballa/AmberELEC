@@ -3,52 +3,45 @@
 # Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="mesa"
-PKG_VERSION="19.1.7"
-PKG_SHA256="97c9f6a6127bee5ab21c3fe63ff3e0bd73a7966415f92f66500b0b276b7150da"
+PKG_VERSION="24.3.3"
+PKG_SHA256="105afc00a4496fa4d29da74e227085544919ec7c86bd92b0b6e7fcc32c7125f4"
 PKG_LICENSE="OSS"
 PKG_SITE="http://www.mesa3d.org/"
-PKG_URL="https://github.com/mesa3d/mesa/archive/mesa-${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain expat wayland Mako:host"
+PKG_URL="https://archive.mesa3d.org/mesa-${PKG_VERSION}.tar.xz"
+PKG_DEPENDS_TARGET="toolchain expat wayland Mako:host libdrm pyyaml:host"
 PKG_LONGDESC="Mesa is a 3-D graphics library with an API."
-PKG_TOOLCHAIN="manual"
-PKG_BUILD_FLAGS="+lto"
+PKG_TOOLCHAIN="meson"
+#PKG_BUILD_FLAGS="+lto"
 
 get_graphicdrivers
 
-PKG_MESON_OPTS_TARGET="-Ddri-drivers=${DRI_DRIVERS// /,} \
-                       -Dgallium-drivers=${GALLIUM_DRIVERS// /,} \
+PKG_MESON_OPTS_TARGET="-Dgallium-drivers=panfrost \
                        -Dgallium-extra-hud=false \
-                       -Dgallium-xvmc=false \
-                       -Dgallium-omx=disabled \
                        -Dgallium-nine=false \
                        -Dgallium-opencl=disabled \
                        -Dshader-cache=true \
                        -Dshared-glapi=true \
                        -Dopengl=true \
+		       -Degl-native-platform=wayland \
                        -Dgbm=true \
                        -Degl=true \
                        -Dglvnd=false \
-                       -Dasm=true \
                        -Dvalgrind=false \
                        -Dlibunwind=false \
                        -Dlmsensors=false \
                        -Dbuild-tests=false \
+		       -Dbuild-aco-tests=false \
                        -Dselinux=false \
-                       -Dosmesa=none \
-		       -Dgles2=true" \
-		       -Dplatforms=wayland
+                       -Dosmesa=false \
+		       -Dgles1=false \
+		       -Dgles2=false \
+		       -Dvulkan-layers=device-select \
+		       -Dvulkan-drivers="
 			
 
-if [ "${DISPLAYSERVER}" = "x11" ]; then
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr"
-  export X11_INCLUDES=
-  PKG_MESON_OPTS_TARGET+=" -Dplatforms=x11,drm -Ddri3=true -Dglx=dri"
-elif [ "${DISPLAYSERVER}" = "weston" ]; then
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} wayland wayland-protocols"
-  PKG_MESON_OPTS_TARGET+=" -Dplatforms=wayland,drm -Ddri3=false -Dglx=disabled"
-else
-  PKG_MESON_OPTS_TARGET+=" -Dplatforms=drm -Ddri3=false -Dglx=disabled"
-fi
+  PKG_MESON_OPTS_TARGET+=" -Dplatforms=wayland,x11 -Dglx=dri"
 
 if [ "${LLVM_SUPPORT}" = "yes" ]; then
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} elfutils llvm"
@@ -78,30 +71,18 @@ else
   PKG_MESON_OPTS_TARGET+=" -Dgallium-xa=false"
 fi
 
-if [ "${OPENGLES_SUPPORT}" = "yes" ]; then
-  PKG_MESON_OPTS_TARGET+=" -Dgles1=false -Dgles2=true"
-else
-  PKG_MESON_OPTS_TARGET+=" -Dgles1=false -Dgles2=false"
-fi
 
 # Temporary workaround:
 # Listed libraries are static, while mesa expects shared ones. This breaks the
 # dependency tracking. The following has some ideas on how to address that.
 # https://github.com/LibreELEC/LibreELEC.tv/pull/2163
-pre_configure_target() {
-  if [ "${DISPLAYSERVER}" = "x11" ]; then
-    export LIBS="-lxcb-dri3 -lxcb-dri2 -lxcb-xfixes -lxcb-present -lxcb-sync -lxshmfence -lz"
-  fi
-}
+#pre_configure_target() {
+#  if [ "${DISPLAYSERVER}" = "x11" ]; then
+#    export LIBS="-lxcb-dri3 -lxcb-dri2 -lxcb-xfixes -lxcb-present -lxcb-sync -lxshmfence -lz"
+#  fi
+#}
 
-post_makeinstall_target() {
-  # Similar hack is needed on EGL, GLES* front. Might as well drop it and test the GLVND?
-  if [ "${DISPLAYSERVER}" = "x11" ]; then
-    # rename and relink for cooperate with nvidia drivers
-    rm -rf ${INSTALL}/usr/lib/libGL.so
-    rm -rf ${INSTALL}/usr/lib/libGL.so.1
-    ln -sf libGL.so.1 ${INSTALL}/usr/lib/libGL.so
-    ln -sf /var/lib/libGL.so ${INSTALL}/usr/lib/libGL.so.1
-    mv ${INSTALL}/usr/lib/libGL.so.1.2.0 ${INSTALL}/usr/lib/libGL_mesa.so.1
-  fi
-}
+#post_makeinstall_target() {
+#    cp src/mapi/shared-glapi/libglapi.so ${INSTALL}/usr/lib/libGL.so
+#    ln -sf ${INSTALL}/usr/lib/libGL.so ${INSTALL}/usr/lib/libGL.so.1
+#}

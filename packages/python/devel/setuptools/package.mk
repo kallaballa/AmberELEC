@@ -8,7 +8,7 @@ PKG_SHA256="8e45c6cb18f81842421560f788521842572a91a0e64419e338a6a15828ccf076"
 PKG_LICENSE="OSS"
 PKG_SITE="https://pypi.org/project/setuptools"
 PKG_URL="https://github.com/pypa/setuptools/archive/v${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_HOST="Python3:host"
+PKG_DEPENDS_HOST="Python3:host glibc:host libxcrypt:host"
 PKG_LONGDESC="Replaces Setuptools as the standard method for working with Python module distributions."
 PKG_TOOLCHAIN="manual"
 
