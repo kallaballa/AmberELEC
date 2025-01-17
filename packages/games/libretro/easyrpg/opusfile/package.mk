@@ -11,5 +11,6 @@ PKG_LONGDESC="Stand-alone decoder library for .opus streams"
 PKG_TOOLCHAIN="configure"
 
 pre_configure_target() {
+  [ -f Makefile ] && make distclean
   ${PKG_BUILD}/autogen.sh
 }

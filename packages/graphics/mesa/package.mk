@@ -21,10 +21,10 @@ PKG_MESON_OPTS_TARGET="-Dgallium-drivers=panfrost \
                        -Dgallium-opencl=disabled \
                        -Dshader-cache=true \
                        -Dshared-glapi=true \
-                       -Dopengl=true \
-		       -Degl-native-platform=wayland \
+                       -Dopengl=false \
                        -Dgbm=true \
                        -Degl=true \
+		       -Degl-native-platform=wayland
                        -Dglvnd=false \
                        -Dvalgrind=false \
                        -Dlibunwind=false \
@@ -33,15 +33,16 @@ PKG_MESON_OPTS_TARGET="-Dgallium-drivers=panfrost \
 		       -Dbuild-aco-tests=false \
                        -Dselinux=false \
                        -Dosmesa=false \
-		       -Dgles1=false \
-		       -Dgles2=false \
+		       -Dgles1=true \
+		       -Dgles2=true \
 		       -Dvulkan-layers=device-select \
-		       -Dvulkan-drivers="
+		       -Dvulkan-drivers= \
+		       -Dlegacy-x11=none"
 			
 
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr"
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} wayland wayland-protocols"
-  PKG_MESON_OPTS_TARGET+=" -Dplatforms=wayland,x11 -Dglx=dri"
+  PKG_MESON_OPTS_TARGET+=" -Dplatforms=wayland,x11 -Dglx=disabled"
 
 if [ "${LLVM_SUPPORT}" = "yes" ]; then
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} elfutils llvm"
@@ -82,7 +83,34 @@ fi
 #  fi
 #}
 
-#post_makeinstall_target() {
-#    cp src/mapi/shared-glapi/libglapi.so ${INSTALL}/usr/lib/libGL.so
+post_makeinstall_target() {
+#    cp ${PKG_REAL_BUILD}/src/mapi/shared-glapi/libglapi.so.0.0.0 ${INSTALL}/usr/lib/libglapi.so.0.0.0
+#    ln -sf ${INSTALL}/usr/lib/libglapi.so.0.0.0 ${INSTALL}/usr/lib/libglapi.so.0
+#    ln -sf ${INSTALL}/usr/lib/libglapi.so.0.0.0 ${INSTALL}/usr/lib/libglapi.so
+
+#    cp ${PKG_REAL_BUILD}/src/glx/libGL.so.1.2.0 ${INSTALL}/usr/lib/libGL.so
 #    ln -sf ${INSTALL}/usr/lib/libGL.so ${INSTALL}/usr/lib/libGL.so.1
-#}
+#    ln -sf ${INSTALL}/usr/lib/libGL.so.1 ${INSTALL}/usr/lib/libGL.so.1.2.0
+    
+#    cp ${PKG_REAL_BUILD}/src/mapi/es1api/libGLESv1_CM.so.1.1.0 ${INSTALL}/usr/lib/libGLESv1_CM.so
+#    ln -sf ${INSTALL}/usr/lib/libGLESv1_CM.so ${INSTALL}/usr/lib/libGLESv1_CM.so.1
+#    ln -sf ${INSTALL}/usr/lib/libGLESv1_CM.so.1 ${INSTALL}/usr/lib/libGLESv1_CM.so.1.1.0
+
+#    cp ${PKG_REAL_BUILD}/src/mapi/es2api/libGLESv2.so.2.0.0 ${INSTALL}/usr/lib/libGLESv2.so
+#    ln -sf ${INSTALL}/usr/lib/libGLESv2.so ${INSTALL}/usr/lib/libGLESv2.so.2
+#    ln -sf ${INSTALL}/usr/lib/libGLESv2.so.2 ${INSTALL}/usr/lib/libGLESv2.so.2.0.0
+
+    cp ${PKG_REAL_BUILD}/src/mapi/es2api/libGLESv2.so.2.0.0 ${INSTALL}/usr/lib/libGLESv3.so
+    cp ${PKG_REAL_BUILD}/src/mapi/es2api/libGLESv2.so.2.0.0 ${SYSROOT_PREFIX}/usr/lib/libGLESv3.so
+
+    rm -rf ${INSTALL}/usr/lib/libGL.so*
+    rm -rf ${SYSROOT_PREFIX}/usr/lib/libGL.so*
+
+    cd ${INSTALL}/usr/lib/
+    ln -sf libGLESv3.so libGLESv3.so.3
+    ln -sf libGLESv3.so libGLESv3.so.3.0.0
+
+    cd ${SYSROOT_PREFIX}/usr/lib/
+    ln -sf libGLESv3.so libGLESv3.so.3
+    ln -sf libGLESv3.so libGLESv3.so.3.0.0
+}

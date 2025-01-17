@@ -7,7 +7,7 @@ PKG_SHA256="6f1944a83e75a716808b941cebbf6fca0ee72fb7fa16b47a1e943596a2a06644"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/mupen64plus-libretro-nx"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain nasm:host ${OPENGLES}"
+PKG_DEPENDS_TARGET="toolchain nasm:host mesa"
 PKG_LONGDESC="mupen64plus NX"
 PKG_TOOLCHAIN="make"
 

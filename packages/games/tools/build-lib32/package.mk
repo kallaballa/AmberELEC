@@ -52,7 +52,6 @@ makeinstall_target() {
 		libsystemd* \
 		libncurses* \
 		libdl* \
-		libMali* \
 		libdrm* \
 		librga* \
 		libpng* \
@@ -63,7 +62,6 @@ makeinstall_target() {
 		libresolv* \
 		libnss_dns* \
 		libpthread* \
-		libmali* \
 		libGLES* \
 		libgnutls* \
 		libgbm* \

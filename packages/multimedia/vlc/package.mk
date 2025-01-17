@@ -4,11 +4,11 @@
 # Copyright (C) 2022-present AmberELEC (https://github.com/AmberELEC
 
 PKG_NAME="vlc"
-PKG_VERSION="3.0.18"
+PKG_VERSION="3.0.9.2"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.videolan.org"
 PKG_URL="https://mirror.netcologne.de/videolan.org/${PKG_NAME}/${PKG_VERSION}/${PKG_NAME}-${PKG_VERSION}.tar.xz"
-PKG_DEPENDS_TARGET="toolchain gnutls ffmpeg libmpeg2 zlib flac libvorbis libxml2 pulseaudio SDL2 x264 aom libogg libdrm librga ${OPENGLES} wayland"
+PKG_DEPENDS_TARGET="toolchain gnutls ffmpeg libmpeg2 zlib flac libvorbis libxml2 pulseaudio SDL2 x264 aom libogg libdrm librga wayland"
 PKG_SHORTDESC="VideoLAN multimedia player and streamer"
 PKG_LONGDESC="VLC is the VideoLAN project's media player. It plays MPEG, MPEG2, MPEG4, DivX, MOV, WMV, QuickTime, mp3, Ogg/Vorbis files, DVDs, VCDs, and multimedia streams from various network sources."
 
@@ -128,6 +128,9 @@ pre_configure_target() {
   export LDFLAGS="${LDFLAGS} -lresolv -fopenmp -lm"
   export PKG_CONFIG_PATH="${SYSROOT_PREFIX}/usr/lib/pkgconfig/; ${SYSROOT_PREFIX}/usr/share/pkgconfig/;"
   mkdir -p "${PKG_REAL_BUILD}"/modules/video_output/wayland
+  #sed -i 's/libavutil < 55/libavutil < 100/g' ${PKG_REAL_BUILD}/../configure.ac ${PKG_REAL_BUILD}/../configure
+  cd "${PKG_REAL_BUILD}"/..
+  ./bootstrap
 }
 
 post_makeinstall_target() {

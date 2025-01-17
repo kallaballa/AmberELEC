@@ -8,7 +8,7 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="https://www.libsdl.org/"
 PKG_URL="https://github.com/libsdl-org/SDL-1.2/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain yasm:host alsa-lib systemd dbus wayland"
+PKG_DEPENDS_TARGET="toolchain yasm:host alsa-lib systemd dbus wayland mesa xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr pulseaudio"
 PKG_SECTION="multimedia"
 PKG_SHORTDESC="SDL: A cross-platform Graphic API"
 PKG_LONGDESC="Simple DirectMedia Layer is a cross-platform multimedia library designed to provide fast access to the graphics framebuffer and audio device. It is used by MPEG playback software, emulators, and many popular games, including the award winning Linux port of 'Civilization: Call To Power.' Simple DirectMedia Layer supports Linux, Win32, BeOS, MacOS, Solaris, IRIX, and FreeBSD."
@@ -63,26 +63,13 @@ PKG_CONFIGURE_OPTS_TARGET="--enable-shared \
                            --enable-arm-neon"
 
 
-PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --enable-video --disable-video-x11 --disable-x11-shared"
-PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-x11-xcursor --disable-video-x11-xinerama"
-PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-x11-xinput --disable-video-x11-xrandr"
-PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-x11-scrnsaver --disable-video-x11-xshape"
-PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-x11-vm --without-x"
+PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --enable-video --enable-video-x11 --enable-x11-shared"
+PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --enable-video-x11-xcursor --enable-video-x11-xinerama"
+PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --enable-video-x11-xinput --enable-video-x11-xrandr"
+PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --enable-video-x11-scrnsaver --enable-video-x11-xshape"
+PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --enable-video-x11-vm"
 
-PKG_CONFIGURE_OPTS_HOST="${PKG_CONFIGURE_OPTS_TARGET} --disable-video --disable-video-x11 --disable-x11-shared"
-PKG_CONFIGURE_OPTS_HOST="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-x11-xcursor --disable-video-x11-xinerama"
-PKG_CONFIGURE_OPTS_HOST="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-x11-xinput --disable-video-x11-xrandr"
-PKG_CONFIGURE_OPTS_HOST="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-x11-scrnsaver --disable-video-x11-xshape"
-PKG_CONFIGURE_OPTS_HOST="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-x11-vm --without-x"
-
-
-if [ ! "${OPENGL}" = "no" ]; then
-  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} ${OPENGL}"
-
-  PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --enable-video-opengl --enable-video-opengles --disable-video-fbcon"
-else
-  PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --disable-video-opengl --enable-video-opengles --disable-video-fbcon"
-fi
+PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_TARGET} --enable-video-opengl --enable-video-opengles --disable-video-fbcon"
 
 if [ "${PULSEAUDIO_SUPPORT}" = yes ]; then
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} pulseaudio"

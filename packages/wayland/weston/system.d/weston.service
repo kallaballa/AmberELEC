@@ -9,7 +9,7 @@ Environment=HOME=/storage
 Environment=XDG_RUNTIME_DIR=/var/run/0-runtime-dir
 WorkingDirectory=/storage
 ExecStartPre=-/usr/lib/weston/weston-config
-ExecStart=/usr/bin/seatd-launch /usr/bin/weston --log=/var/log/weston.log
+ExecStart=/usr/bin/seatd-launch -- /usr/bin/weston --log=/var/log/weston.log
 Restart=always
 RestartSec=10
 
