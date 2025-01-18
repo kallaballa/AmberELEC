@@ -1,0 +1,17 @@
+[Unit]
+Description=Nix Daemon
+Documentation=man:nix-daemon https://nixos.org/manual
+RequiresMountsFor=/nix/store
+RequiresMountsFor=/nix/var
+RequiresMountsFor=/nix/var/nix/db
+ConditionPathIsReadWrite=/nix/var/nix/daemon-socket
+
+[Service]
+ExecStart=@/nix/store/0qqzr73nid1lk9k3myxkg25vgypaspyf-nix-2.25.3/bin/nix-daemon nix-daemon --daemon
+KillMode=process
+LimitNOFILE=1048576
+TasksMax=1048576
+Delegate=yes
+
+[Install]
+WantedBy=multi-user.target

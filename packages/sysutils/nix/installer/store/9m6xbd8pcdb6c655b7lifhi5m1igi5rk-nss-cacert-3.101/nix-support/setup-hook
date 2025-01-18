@@ -1,0 +1,7 @@
+export NIX_SSL_CERT_FILE=/nix/store/9m6xbd8pcdb6c655b7lifhi5m1igi5rk-nss-cacert-3.101/etc/ssl/certs/ca-bundle.crt
+
+# compatibility
+#  - openssl
+export SSL_CERT_FILE=/nix/store/9m6xbd8pcdb6c655b7lifhi5m1igi5rk-nss-cacert-3.101/etc/ssl/certs/ca-bundle.crt
+#  - Haskell x509-system
+export SYSTEM_CERTIFICATE_PATH=/nix/store/9m6xbd8pcdb6c655b7lifhi5m1igi5rk-nss-cacert-3.101/etc/ssl/certs/ca-bundle.crt

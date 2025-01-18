@@ -21,10 +21,11 @@ PKG_MESON_OPTS_TARGET="-Dgallium-drivers=panfrost \
                        -Dgallium-opencl=disabled \
                        -Dshader-cache=true \
                        -Dshared-glapi=true \
-                       -Dopengl=false \
+		       -Dtools=panfrost \
+                       -Dopengl=true \
                        -Dgbm=true \
                        -Degl=true \
-		       -Degl-native-platform=wayland
+		       -Degl-native-platform=wayland \
                        -Dglvnd=false \
                        -Dvalgrind=false \
                        -Dlibunwind=false \
@@ -37,12 +38,13 @@ PKG_MESON_OPTS_TARGET="-Dgallium-drivers=panfrost \
 		       -Dgles2=true \
 		       -Dvulkan-layers=device-select \
 		       -Dvulkan-drivers= \
-		       -Dlegacy-x11=none"
+		       -Dlegacy-x11=dri2 \
+                       -Dtools="
 			
 
-  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr"
+PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} xorgproto libX11 libXrandr libXfixes libxshmfence libXxf86vm" #xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr"
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} wayland wayland-protocols"
-  PKG_MESON_OPTS_TARGET+=" -Dplatforms=wayland,x11 -Dglx=disabled"
+  PKG_MESON_OPTS_TARGET+=" -Dplatforms=wayland,x11 -Dglx=dri"
 
 if [ "${LLVM_SUPPORT}" = "yes" ]; then
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} elfutils llvm"
@@ -102,9 +104,6 @@ post_makeinstall_target() {
 
     cp ${PKG_REAL_BUILD}/src/mapi/es2api/libGLESv2.so.2.0.0 ${INSTALL}/usr/lib/libGLESv3.so
     cp ${PKG_REAL_BUILD}/src/mapi/es2api/libGLESv2.so.2.0.0 ${SYSROOT_PREFIX}/usr/lib/libGLESv3.so
-
-    rm -rf ${INSTALL}/usr/lib/libGL.so*
-    rm -rf ${SYSROOT_PREFIX}/usr/lib/libGL.so*
 
     cd ${INSTALL}/usr/lib/
     ln -sf libGLESv3.so libGLESv3.so.3
