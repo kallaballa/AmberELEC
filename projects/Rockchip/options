@@ -30,16 +30,16 @@
     ALSA_SUPPORT="yes"
 
   # OpenGL(X) implementation to use (no / mesa)
-    OPENGL="no"
+    OPENGL="mesa"
 
   # OpenGL-ES implementation to use (no / bcm2835-driver / gpu-viv-bin-mx6q)
-    OPENGLES="libmali"
+    OPENGLES="mesa"
 
   # include uvesafb support (yes / no)
     UVESAFB_SUPPORT="no"
 
   # Displayserver to use (weston / no)
-    DISPLAYSERVER="no"
+    DISPLAYSERVER="weston"
 
   # Windowmanager to use (fluxbox / none)
     WINDOWMANAGER="none"
@@ -47,7 +47,7 @@
   # Xorg Graphic drivers to use (all / i915,i965,r200,r300,r600,nvidia)
   # Space separated list is supported,
   # e.g. GRAPHIC_DRIVERS="i915 i965 r300 r600 radeonsi nvidia"
-    GRAPHIC_DRIVERS=""
+    GRAPHIC_DRIVERS="panfrost"
 
   # Modules to install in initramfs for early boot
     INITRAMFS_MODULES=""
@@ -62,3 +62,4 @@
 
   # debug tty path
     DEBUG_TTY="/dev/ttyS2"
+

@@ -1,0 +1,10 @@
+[Unit]
+Description=Copy the initial nix store
+Before=storage-nix.mount
+After=local-fs.target
+
+[Service]
+ExecStart=/bin/bash -c '[ ! -d /storage/nix/ ] && cp -a /nix /storage/nix'
+
+[Install]
+WantedBy=storage-nix.mount

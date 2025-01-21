@@ -22,7 +22,7 @@ fi
 makeinstall_target() {
   # Install vendor header files
   mkdir -p ${SYSROOT_PREFIX}/usr/include
-    if [ "${OPENGLES}" = "bcm2835-driver" ]; then
+    if [ "mesa" = "bcm2835-driver" ]; then
       cp -PRv ${PKG_FLOAT}/opt/vc/include/* ${SYSROOT_PREFIX}/usr/include
     else
       for f in $(cd ${PKG_FLOAT}/opt/vc/include; ls | grep -v "GL"); do
@@ -32,7 +32,7 @@ makeinstall_target() {
 
   # Install EGL, OpenGL ES, Open VG, etc. vendor libs & pkgconfigs
   mkdir -p ${SYSROOT_PREFIX}/usr/lib
-    if [ "${OPENGLES}" = "bcm2835-driver" ]; then
+    if [ "mesa" = "bcm2835-driver" ]; then
       cp -PRv ${PKG_FLOAT}/opt/vc/lib/*.so              ${SYSROOT_PREFIX}/usr/lib
       ln -sf ${SYSROOT_PREFIX}/usr/lib/libbrcmEGL.so    ${SYSROOT_PREFIX}/usr/lib/libEGL.so
       ln -sf ${SYSROOT_PREFIX}/usr/lib/libbrcmGLESv2.so ${SYSROOT_PREFIX}/usr/lib/libGLESv2.so
@@ -60,7 +60,7 @@ makeinstall_target() {
 
   # Install EGL, OpenGL ES and other vendor libs
   mkdir -p ${INSTALL}/usr/lib
-    if [ "${OPENGLES}" = "bcm2835-driver" ]; then
+    if [ "mesa" = "bcm2835-driver" ]; then
       cp -PRv ${PKG_FLOAT}/opt/vc/lib/*.so ${INSTALL}/usr/lib
       ln -sf /usr/lib/libbrcmEGL.so        ${INSTALL}/usr/lib/libEGL.so
       ln -sf /usr/lib/libbrcmEGL.so        ${INSTALL}/usr/lib/libEGL.so.1
@@ -90,7 +90,7 @@ makeinstall_target() {
 
 post_install() {
   # unbind Framebuffer console
-  if [ "${OPENGLES}" = "bcm2835-driver" ]; then
+  if [ "mesa" = "bcm2835-driver" ]; then
     enable_service unbind-console.service
   fi
 }

@@ -13,7 +13,7 @@ PKG_DEPENDS_TARGET="toolchain zlib"
 PKG_LONGDESC="The libxml package contains an XML library, which allows you to manipulate XML files."
 
 PKG_CONFIGURE_OPTS_ALL="ac_cv_header_ansidecl_h=no \
-             --enable-static \
+             --disable-static \
              --enable-shared \
              --disable-silent-rules \
              --enable-ipv6 \

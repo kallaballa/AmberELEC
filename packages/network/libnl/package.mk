@@ -11,6 +11,6 @@ PKG_URL="https://github.com/thom311/libnl/releases/download/libnl${PKG_VERSION//
 PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="A library for applications dealing with netlink socket."
 
-PKG_CONFIGURE_OPTS_TARGET="--enable-static \
-                           --disable-shared \
+PKG_CONFIGURE_OPTS_TARGET="--disable-static \
+                           --enable-shared \
                            --disable-cli"

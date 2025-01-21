@@ -7,7 +7,7 @@ PKG_SHA256="0279be2fdc2f2c2f037b12ee88107b8fe1130168a4df288629ba413b6eaf3933"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/mupen64plus/mupen64plus-video-rice"
 PKG_URL="https://github.com/mupen64plus/mupen64plus-video-rice/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain ${OPENGLES} libpng SDL2 SDL2_net zlib freetype nasm:host mupen64plussa-core"
+PKG_DEPENDS_TARGET="toolchain mesa libpng SDL2 SDL2_net zlib freetype nasm:host mupen64plussa-core"
 PKG_LONGDESC="Mupen64Plus Standalone Rice Video Driver"
 PKG_TOOLCHAIN="manual"
 

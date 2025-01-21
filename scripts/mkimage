@@ -10,8 +10,11 @@
 # script to work must be passed via env ... in scripts/image
 ################################################################################
 
+set -x
+
 # set variables
-LE_TMP=$(mktemp -d)
+export LE_TMP="$(mktemp -d XXXXXXXX)"
+
 SAVE_ERROR="${LE_TMP}/save_error"
 
 if [ -z "${SYSTEM_SIZE}" -o -z "${SYSTEM_PART_START}" ]; then
@@ -111,7 +114,7 @@ alias mcopy="mcopy -i ${DISK}@@${OFFSET}"
 alias mmd="mmd -i ${DISK}@@${OFFSET}"
 
 if [ "${BOOTLOADER}" = "syslinux" -o "${BOOTLOADER}" = "bcm2835-bootloader" -o "${BOOTLOADER}" = "u-boot" ]; then
-  mformat -v "${DISTRO_BOOTLABEL}" -N "${UUID_SYSTEM//-/}" ::
+  mformat -v "${DISTRO_BOOTLABEL}" -N "${UUID_SYSTEM//-/}"
 fi
 sync
 
@@ -161,7 +164,7 @@ menuentry "Run" {
 }
 EOF
 
-  mcopy "${LE_TMP}/syslinux.cfg" ::
+  mcopy "${LE_TMP}/syslinux.cfg"
 
   # install syslinux
   echo "image: installing syslinux to part1..."
@@ -170,15 +173,23 @@ EOF
   # copy files
   echo "image: copying files to part1..."
   mcopy "${TARGET_IMG}/${BUILD_NAME}.kernel" "::/${KERNEL_NAME}"
-  mcopy "${TARGET_IMG}/${BUILD_NAME}.system" ::/SYSTEM
+  mcopy "${TARGET_IMG}/${BUILD_NAME}.system" "::/SYSTEM"
   mcopy "${RELEASE_DIR}/target/KERNEL.md5" "::/${KERNEL_NAME}.md5"
-  mcopy "${RELEASE_DIR}/target/SYSTEM.md5" ::/SYSTEM.md5
+  mcopy "${RELEASE_DIR}/target/SYSTEM.md5" "::/SYSTEM.md5"
+  ls "${TARGET_IMG}"/AmberELEC-RG351P.aarch64-20211122/3rdparty/bootloader/*dtb | while read file; do
+  mcopy -D s "${file}" "::$(basename ${file})"
+  done
 
+  mkdir -p "${LE_TMP}/extlinux"
+  cp "${TARGET_IMG}/AmberELEC-RG351P.aarch64-20211122/3rdparty/bootloader/rk3326-rg351p-linux.dtb.conf" "${LE_TMP}/extlinux/extlinux.conf"
+  mcopy -D s -s "${LE_TMP}/extlinux" "::extlinux"
+
+  
   mmd EFI EFI/BOOT
-  mcopy "${TOOLCHAIN}/share/syslinux/bootx64.efi" ::/EFI/BOOT
-  mcopy "${TOOLCHAIN}/share/syslinux/ldlinux.e64" ::/EFI/BOOT
-  mcopy "${TOOLCHAIN}/share/grub/bootia32.efi" ::/EFI/BOOT
-  mcopy "${LE_TMP}/grub.cfg" ::/EFI/BOOT
+  mcopy "${TOOLCHAIN}/share/syslinux/bootx64.efi"/EFI/BOOT
+  mcopy "${TOOLCHAIN}/share/syslinux/ldlinux.e64"/EFI/BOOT
+  mcopy "${TOOLCHAIN}/share/grub/bootia32.efi"/EFI/BOOT
+  mcopy "${LE_TMP}/grub.cfg"/EFI/BOOT
 
 elif [ "${BOOTLOADER}" = "bcm2835-bootloader" ]; then
   # create bootloader configuration
@@ -187,33 +198,33 @@ elif [ "${BOOTLOADER}" = "bcm2835-bootloader" ]; then
 boot=UUID=${UUID_SYSTEM} disk=UUID=${UUID_STORAGE} quiet ${EXTRA_CMDLINE}
 EOF
 
-  mcopy "${LE_TMP}/cmdline.txt" ::
+  mcopy "${LE_TMP}/cmdline.txt"
 
   # copy files
   echo "image: copying files to part1..."
   mcopy "${TARGET_IMG}/${BUILD_NAME}.kernel" "::/${KERNEL_NAME}"
-  mcopy "${TARGET_IMG}/${BUILD_NAME}.system" ::/SYSTEM
+  mcopy "${TARGET_IMG}/${BUILD_NAME}.system" "::/SYSTEM"
   mcopy "${RELEASE_DIR}/target/KERNEL.md5" "::/${KERNEL_NAME}.md5"
-  mcopy "${RELEASE_DIR}/target/SYSTEM.md5" ::/SYSTEM.md5
+  mcopy "${RELEASE_DIR}/target/SYSTEM.md5" "::/SYSTEM.md5"
 
-  mcopy "${RELEASE_DIR}/3rdparty/bootloader/bootcode.bin" ::
-  mcopy "${RELEASE_DIR}/3rdparty/bootloader/fixup.dat" ::
-  mcopy "${RELEASE_DIR}/3rdparty/bootloader/start.elf" ::
-  mcopy "${RELEASE_DIR}/3rdparty/bootloader/config.txt" ::
-  mcopy "${RELEASE_DIR}/3rdparty/bootloader/distroconfig.txt" ::
+  mcopy "${RELEASE_DIR}/3rdparty/bootloader/bootcode.bin"
+  mcopy "${RELEASE_DIR}/3rdparty/bootloader/fixup.dat"
+  mcopy "${RELEASE_DIR}/3rdparty/bootloader/start.elf"
+  mcopy "${RELEASE_DIR}/3rdparty/bootloader/config.txt"
+  mcopy "${RELEASE_DIR}/3rdparty/bootloader/distroconfig.txt"
 
   if [ -f "${RELEASE_DIR}/3rdparty/bootloader/dt-blob.bin" ]; then
-    mcopy "${RELEASE_DIR}/3rdparty/bootloader/dt-blob.bin" ::
+    mcopy "${RELEASE_DIR}/3rdparty/bootloader/dt-blob.bin"
   fi
 
-  for dtb in "${RELEASE_DIR}/3rdparty/bootloader/"*.dtb ; do
-    if [ -f "${dtb}" ]; then
-      mcopy "${dtb}" ::/$(basename "${dtb}")
-    fi
-  done
+#  for dtb in "${RELEASE_DIR}/3rdparty/bootloader/"*.dtb ; do
+#    if [ -f "${dtb}" ]; then
+#      mcopy "${dtb}"/$(basename "${dtb}")
+#    fi
+#  done
 
   if [ -d "${RELEASE_DIR}/3rdparty/bootloader/overlays" ]; then
-    mcopy -s "${RELEASE_DIR}/3rdparty/bootloader/overlays" ::
+    mcopy -s "${RELEASE_DIR}/3rdparty/bootloader/overlays"
   fi
 
 elif [ "${BOOTLOADER}" = "u-boot" -a \( -n "${UBOOT_SYSTEM}" -o "${UBOOT_VERSION}" = "vendor" \) ]; then
@@ -222,22 +233,21 @@ elif [ "${BOOTLOADER}" = "u-boot" -a \( -n "${UBOOT_SYSTEM}" -o "${UBOOT_VERSION
 
   if [ "${UBOOT_VERSION}" != "vendor" ]; then
     DTB="$(${SCRIPTS}/uboot_helper ${PROJECT} ${DEVICE} ${UBOOT_SYSTEM} dtb)"
-    if [ -f "${RELEASE_DIR}/3rdparty/bootloader/${DTB}" ]; then
-      mcopy "${RELEASE_DIR}/3rdparty/bootloader/${DTB}" ::
+    if [ -f "${RELEASE_DIR}/3rdparty/bootloader/${DTB}" ]; then 
+      mcopy "${RELEASE_DIR}/3rdparty/bootloader/${DTB}"
     fi
 
     mkdir -p "${LE_TMP}/extlinux"
 
-    cat << EOF > "${LE_TMP}/extlinux/extlinux.conf"
+    cat << EOF > "${LE_TMP}/extlinux/$(basename ${DTB}).conf"
 LABEL ${DISTRO_BOOTLABEL}
   LINUX /${KERNEL_NAME}
   FDT /${DTB}
   APPEND boot=UUID=${UUID_SYSTEM} disk=UUID=${UUID_STORAGE} quiet ${EXTRA_CMDLINE}
 EOF
 
-    #mcopy ${LE_TMP}/extlinux/extlinux.conf ${LE_TMP} ${DTB}
-    mcopy -s "${LE_TMP}/extlinux" ::
-  fi
+     mcopy -D o -s "${LE_TMP}/extlinux"
+fi
 
   if [ -f "${PROJECT_DIR}/${PROJECT}/devices/${DEVICE}/bootloader/mkimage" ]; then
     . "${PROJECT_DIR}/${PROJECT}/devices/${DEVICE}/bootloader/mkimage"
@@ -249,9 +259,10 @@ EOF
 
   echo "image: copying files to part1..."
   mcopy "${TARGET_IMG}/${BUILD_NAME}.kernel" "::/${KERNEL_NAME}"
-  mcopy "${TARGET_IMG}/${BUILD_NAME}.system" ::/SYSTEM
+  mcopy "${TARGET_IMG}/${BUILD_NAME}.system" "::/SYSTEM"
   mcopy "${RELEASE_DIR}/target/KERNEL.md5" "::/${KERNEL_NAME}.md5"
-  mcopy "${RELEASE_DIR}/target/SYSTEM.md5" ::/SYSTEM.md5
+  mcopy "${RELEASE_DIR}/target/SYSTEM.md5" "::/SYSTEM.md5"
+  
 
 elif [ "${BOOTLOADER}" = "u-boot" ]; then
   echo "to make an image using u-boot UBOOT_SYSTEM must be set"
@@ -302,8 +313,8 @@ if [ "${PROJECT}" = "Generic" ]; then
   sed -e "/DEFAULT/ s/installer/run/" -i "${LE_TMP}/syslinux.cfg"
   sed -e "/set default=/s/\"Installer\"/\"Run\"/" -i "${LE_TMP}/grub.cfg"
   # FIXME: an unalias should work here, but it does not; call mcopy directly
-  "${TOOLCHAIN}"/bin/mcopy -i "${LE_TMP}/part1.fat" -o "${LE_TMP}/syslinux.cfg" ::
-  "${TOOLCHAIN}"/bin/mcopy -i "${LE_TMP}/part1.fat" -o "${LE_TMP}/grub.cfg" ::/EFI/BOOT
+  "${TOOLCHAIN}"/bin/mcopy -i "${LE_TMP}/part1.fat" -o "${LE_TMP}/syslinux.cfg"
+  "${TOOLCHAIN}"/bin/mcopy -i "${LE_TMP}/part1.fat" -o "${LE_TMP}/grub.cfg"/EFI/BOOT
   sync
   # merge modified part1 back to tmp disk image
   echo "image: merging part1 back to open virtual appliance..."

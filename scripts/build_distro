@@ -60,10 +60,10 @@ fi
 
 if [ "${ARCH}" == "aarch64" ]
 then
-  if [ -d "release/${ARCH}/${DEVICE}" ]
-  then
-    rm -rf "release/${ARCH}/${DEVICE}"
-  fi
+#  if [ -d "release/${ARCH}/${DEVICE}" ]
+#  then
+#    rm -rf "release/${ARCH}/${DEVICE}"
+#  fi
 mkdir -p release/${ARCH}/${DEVICE}
-mv target/* "release/${ARCH}/${DEVICE}/"
+cp -a target/* "release/${ARCH}/${DEVICE}/"
 fi

@@ -10,8 +10,31 @@
 # PKG_GIT_CLONE_SINGLE (optional) clone single branch only (set to yes)
 # PKG_GIT_CLONE_DEPTH (optional) history to clone, must be a number
 # PKG_GIT_SUBMODULE_DEPTH (optional) history of submodules to clone, must be a number
+. config/functions
+. config/options "${1}"
+export GIT_HTTP_LOW_SPEED_TIME=$[ 60 * 30 ]
 
+wait_leafs() {
+J=0
+while [ $J -eq 0 ]; do
+  leafs="$(pstree -l -c -p -T "$(pgrep -f "perl.*toolchain/bin/parallel" | head -n1 2>/dev/null)" 2>/dev/null | fgrep -v "sleep" | fgrep -v "flock" | sed -nr 's/.*[-].*[(]([0-9]*)[)]$/\1/p' | wc -l)"
+J=$[ $CONCURRENCY_MAKE_LEVEL + $[ $(nproc) / 2 ] - $leafs ]
+  if [ $leafs -eq 0 ]; then
+      sleep 1;
+      continue;
+  elif [ -z "$leafs" ]; then
+      sleep 1;
+      continue;
+  fi
+
+  if [ $J -lt 4 -o -z "$J" ]; then
+    J=0
+    sleep 1;
+  fi
+done
+}
 _get_repo_already_downloaded() {
+   wait_leafs;
   if [ -d "${PACKAGE}" ]; then
     (
       cd "${PACKAGE}"
@@ -103,8 +126,9 @@ for d in "${SOURCES}/${1}/${1}-"* ; do
           # NOTE: we run the submodule update twice if the clone already
           #       exists - but deduplicating would complicate the logic quite a lot and
           #       the second time is almost a no-op
+          wait_leafs;
           seq 0 9 | while read i; do 
-            if ! git pull || ! flock -w 100000 /tmp/git_get.lock git submodule update --init --recursive ${GIT_SUBMODULE_PARAMS}; then
+            if ! git pull || ! git submodule update --init --recursive ${GIT_SUBMODULE_PARAMS}; then
               cd "${opwd}"
               build_msg "CLR_CLEAN" "DELETE" "(${d})"
               GIT_FOUND=NO
@@ -132,7 +156,8 @@ cd "${opwd}"
 
 if [ "${GIT_FOUND}" = "no" ]; then
   build_msg "CLR_GET" "GIT CLONE" "${1}"
-  seq 0 9 | while read i; do flock -w 100000 /tmp/git_get.lock git clone ${GIT_CLONE_PARAMS} "${PKG_URL}" "${PACKAGE}"; if [ -d "${PACKAGE}" ]; then break; fi; sleep 60; done
+  wait_leafs
+  seq 0 9 | while read i; do git clone ${GIT_CLONE_PARAMS} "${PKG_URL}" "${PACKAGE}"; if [ -d "${PACKAGE}" ]; then break; fi; sleep 60; done
 elif [ ! "${GIT_DIR}" = "${PACKAGE}" ]; then
   mv "${GIT_DIR}" "${PACKAGE}"
 fi
@@ -141,7 +166,8 @@ fi
   [ $(git log --oneline --pretty=tformat:"%H" | grep "^${PKG_VERSION}" | wc -l) -eq 1 ] || die "There is no commit '${PKG_VERSION}' on branch '$(git branch | grep ^\* | cut -d ' ' -f2)' of package '${1}'! Aborting!"
   git reset --hard "${PKG_VERSION}"
   build_msg "CLR_GET" "GIT SUBMODULE" "${1}"
-  seq 0 9 | while read i; do flock -w 100000 /tmp/git_get.lock git submodule update --init --recursive ${GIT_SUBMODULE_PARAMS}; if [ -d "${PACKAGE}" ]; then break; fi; sleep 60; done
+  wait_leafs
+  seq 0 9 | while read i; do git submodule update --init --recursive ${GIT_SUBMODULE_PARAMS}; if [ -d "${PACKAGE}" ]; then break; fi; sleep 60; done
 )
 
 GIT_SHA="$(git ls-remote "${PACKAGE}" | grep -m1 HEAD | awk '{print $1;}')"

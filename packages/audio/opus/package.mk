@@ -18,6 +18,6 @@ PKG_BUILD_FLAGS="+pic"
 #  PKG_FIXED_POINT="--disable-fixed-point"
 #fi
 
-PKG_CONFIGURE_OPTS_TARGET="--enable-static \
-                           --disable-shared \
+PKG_CONFIGURE_OPTS_TARGET="--disable-static \
+                           --enable-shared \
                            ${PKG_FIXED_POINT}"

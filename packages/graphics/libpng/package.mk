@@ -8,15 +8,13 @@ PKG_SHA256="535b479b2467ff231a3ec6d92a525906fb8ef27978be4f66dbe05d3f3a01b3a1"
 PKG_LICENSE="LibPNG2"
 PKG_SITE="http://www.libpng.org/"
 PKG_URL="${SOURCEFORGE_SRC}/libpng/${PKG_NAME}-${PKG_VERSION}.tar.xz"
-PKG_DEPENDS_HOST="zlib:host"
-PKG_DEPENDS_TARGET="toolchain zlib"
+PKG_DEPENDS_HOST="toolchain:host zlib:host pkg-config:host"
+PKG_DEPENDS_TARGET="toolchain zlib pkg-config"
 PKG_LONGDESC="An extensible file format for the lossless, portable, well-compressed storage of raster images."
 PKG_TOOLCHAIN="configure"
 PKG_BUILD_FLAGS="+pic +pic:host"
 
-PKG_CONFIGURE_OPTS_TARGET="ac_cv_lib_z_zlibVersion=yes \
-                           --enable-static \
-                           --enable-shared"
+PKG_CONFIGURE_OPTS_TARGET="ac_cv_lib_z_zlibVersion=yes --enable-static --disable-shared"
 
 PKG_CONFIGURE_OPTS_HOST="--enable-static --disable-shared"
 

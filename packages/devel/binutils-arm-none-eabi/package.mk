@@ -15,7 +15,7 @@ PKG_CONFIGURE_OPTS_HOST="--target=arm-none-eabi \
                          --with-sysroot=${SYSROOT_PREFIX} \
                          --with-lib-path=${SYSROOT_PREFIX}/lib:${SYSROOT_PREFIX}/usr/lib \
                          --without-ppl \
-                         --enable-static \
+                         --disable-static \
                          --without-cloog \
                          --disable-werror \
                          --disable-multilib \

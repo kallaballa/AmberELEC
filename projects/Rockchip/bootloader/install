@@ -88,7 +88,6 @@ EOF
   cp -av trust.img $INSTALL/usr/share/bootloader
 fi
 
-LE_TMP=$(mktemp -d)
 mkdir -p "${LE_TMP}/extlinux" 
 mkdir -p $INSTALL/usr/share/bootloader/extlinux
 

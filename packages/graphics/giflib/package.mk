@@ -11,7 +11,7 @@ PKG_DEPENDS_HOST="zlib:host"
 PKG_DEPENDS_TARGET="toolchain zlib"
 PKG_LONGDESC="giflib: giflib service library"
 
-PKG_CONFIGURE_OPTS_HOST="--disable-shared --enable-static"
+PKG_CONFIGURE_OPTS_HOST="--enable-shared --disable-static"
 PKG_CONFIGURE_OPTS_TARGET="--with-sysroot=${SYSROOT_PREFIX}"
 
 post_makeinstall_target() {

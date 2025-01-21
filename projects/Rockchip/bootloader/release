@@ -1,3 +1,4 @@
+#!/bin/bash
 # SPDX-License-Identifier: GPL-2.0
 # Copyright (C) 2017-present Team LibreELEC (https://libreelec.tv)
 
@@ -34,7 +35,6 @@ mkdir -p $RELEASE_DIR/3rdparty/bootloader
     cp -f $UBOOT_DTS_DIR/rg351mp-uboot.dtb $RELEASE_DIR/3rdparty/bootloader
   fi
   
-LE_TMP=$(mktemp -d)
 mkdir -p "${LE_TMP}/extlinux" 
 mkdir -p $RELEASE_DIR/3rdparty/bootloader
 

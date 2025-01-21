@@ -13,7 +13,7 @@ PKG_LONGDESC="A Sample Rate Converter for audio."
 PKG_BUILD_FLAGS="+pic"
 
 # package specific configure options
-PKG_CONFIGURE_OPTS_TARGET="--enable-static \
+PKG_CONFIGURE_OPTS_TARGET="--disable-static \
                            --datadir=/usr/share \
                            --disable-fftw \
                            --enable-sndfile"

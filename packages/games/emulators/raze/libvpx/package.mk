@@ -26,14 +26,14 @@ configure_target() {
                         --target=${PKG_TARGET_NAME_LIBVPX} \
                         --disable-docs \
                         --disable-examples \
-                        --disable-shared \
+                        --enable-shared \
                         --disable-tools \
                         --disable-unit-tests \
                         --disable-vp8-decoder \
                         --disable-vp9-decoder \
                         --enable-ccache \
                         --enable-pic \
-                        --enable-static \
+                        --disable-static \
                         --enable-vp8 \
                         --enable-vp9
 }

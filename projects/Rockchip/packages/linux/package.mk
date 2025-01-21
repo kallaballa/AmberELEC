@@ -15,14 +15,14 @@ fi
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.kernel.org"
 PKG_DEPENDS_HOST="ccache:host openssl:host"
-PKG_DEPENDS_TARGET="toolchain linux:host cpio:host kmod:host xz:host wireless-regdb keyutils ${KERNEL_EXTRA_DEPENDS_TARGET}"
-PKG_DEPENDS_INIT="toolchain"
+PKG_DEPENDS_TARGET="toolchain early linux:host cpio:host kmod:host xz:host wireless-regdb keyutils plymouth-lite ${KERNEL_EXTRA_DEPENDS_TARGET}"
+PKG_DEPENDS_INIT="toolchain plymouth-lite:init"
 PKG_NEED_UNPACK="${LINUX_DEPENDS} $(get_pkg_directory busybox)"
 PKG_LONGDESC="This package contains the kernel for the RG351P/M/V/MP and RG552"
 PKG_IS_KERNEL_PKG="yes"
 PKG_STAMP="${KERNEL_TARGET} ${KERNEL_MAKE_EXTRACMD}"
 
-if [[ "${DEVICE}" == RG351V ]]; then
+if [[ "${DEVICE}" == RG351P ]]; then
   PKG_PATCH_DIRS="${DEVICE}"
 fi
 
@@ -272,6 +272,9 @@ makeinstall_target() {
     done
     cp -p arch/${TARGET_KERNEL_ARCH}/boot/dts/overlays/README ${INSTALL}/usr/share/bootloader/overlays
   fi
+  kernel_make INSTALL_HDR_PATH=dest headers_install
+  mkdir -p ${SYSROOT_PREFIX}/usr/include
+  cp -R dest/include/* ${SYSROOT_PREFIX}/usr/include
 }
 
 make_init() {

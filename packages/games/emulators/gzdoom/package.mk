@@ -7,7 +7,7 @@ PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/dhwz/gzdoom"
 PKG_URL="${PKG_SITE}.git"
 PKG_DEPENDS_HOST="toolchain zmusic:host libwebp:host"
-PKG_DEPENDS_TARGET="toolchain SDL2 gzdoom:host zmusic libwebp"
+PKG_DEPENDS_TARGET="toolchain SDL2 gzdoom:host zmusic libwebp xz:host xz"
 PKG_LONGDESC="GZDoom is a modder-friendly OpenGL and Vulkan source port based on the DOOM engine"
 PKG_TOOLCHAIN="cmake-make"
 

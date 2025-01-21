@@ -11,4 +11,4 @@ PKG_URL="http://netfilter.org/projects/libnftnl/files/${PKG_NAME}-${PKG_VERSION}
 PKG_DEPENDS_TARGET="toolchain libmnl"
 PKG_LONGDESC="A userspace library providing a low-level netlink programming interface (API) to the in-kernel nf_tables subsystem."
 
-PKG_CONFIGURE_OPTS_TARGET="--disable-shared --enable-static"
+PKG_CONFIGURE_OPTS_TARGET="--enable-shared --disable-static"

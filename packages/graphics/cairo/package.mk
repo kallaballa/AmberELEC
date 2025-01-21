@@ -11,43 +11,16 @@ PKG_DEPENDS_TARGET="toolchain zlib freetype fontconfig glib libpng pixman libxcb
 PKG_LONGDESC="Cairo is a vector graphics library with cross-device output support."
 PKG_TOOLCHAIN="configure" # ToDo
 
-if [ "${OPENGL}" != "no" ]; then
-  PKG_DEPENDS_TARGET+=" ${OPENGL}"
-fi
 
-if [ "${OPENGLES}" != "no" ]; then
-  PKG_DEPENDS_TARGET+=" ${OPENGLES}"
-fi
-
-if [ "${DISPLAYSERVER}" = "x11" ]; then
-  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} libXrender libX11 mesa"
+  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} libXrender libX11"
   PKG_CAIRO_CONFIG="--x-includes="${SYSROOT_PREFIX}/usr/include" \
                     --x-libraries="${SYSROOT_PREFIX}/usr/lib" \
                     --enable-xlib \
                     --enable-xlib-xrender \
-                    --enable-gl \
-                    --enable-glx \
-                    --disable-glesv2 \
-                    --disable-egl \
-                    --with-x"
-
-elif [ "${DISPLAYSERVER}" = "weston" ]; then
-  PKG_CAIRO_CONFIG="--disable-xlib \
-                    --disable-xlib-xrender \
-                    --disable-gl \
                     --disable-glx \
+                    --with-x \
                     --enable-glesv2 \
-                    --enable-egl \
-                    --without-x"
-else
-  PKG_CAIRO_CONFIG="--disable-xlib \
-                    --disable-xlib-xrender \
-                    --disable-gl \
-                    --disable-glx \
-                    --disable-glesv2 \
-                    --disable-egl \
-                    --without-x"
-fi
+                    --enable-egl"
 
 PKG_CONFIGURE_OPTS_TARGET="${PKG_CAIRO_CONFIG} \
                            --disable-silent-rules \

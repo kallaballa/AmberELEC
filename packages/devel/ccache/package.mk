@@ -11,6 +11,8 @@ PKG_SITE="https://ccache.dev/download.html"
 PKG_URL="https://github.com/ccache/ccache/releases/download/v${PKG_VERSION}/${PKG_NAME}-${PKG_VERSION}.tar.xz"
 PKG_LONGDESC="A compiler cache to speed up re-compilation of C/C++ code by caching."
 PKG_TOOLCHAIN="cmake"
+PKG_DEPENDS_TARGET="cmake:host linux:host"
+PKG_DEPENDS_HOST="cmake:host"
 
 pre_configure_host() {
   export CC=${LOCAL_CC}

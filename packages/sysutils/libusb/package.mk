@@ -13,7 +13,7 @@ PKG_DEPENDS_TARGET="toolchain systemd"
 PKG_LONGDESC="The libusb project's aim is to create a Library for use by user level applications to USB devices."
 
 PKG_CONFIGURE_OPTS_TARGET="--enable-shared \
-            --enable-static \
+            --disable-static \
             --disable-log \
             --disable-debug-log \
             --enable-udev \

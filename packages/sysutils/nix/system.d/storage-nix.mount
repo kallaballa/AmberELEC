@@ -1,0 +1,8 @@
+[Unit]
+SourcePath=/proc/cmdline
+After=nix-copy.target
+Before=multi-user.target
+
+[Mount]
+What=/nix
+Where=/storage/nix

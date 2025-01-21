@@ -7,7 +7,7 @@ PKG_VERSION="2.39.3"
 PKG_SHA256="7b6605e48d1a49f43cc4b4cfc59f313d0dd5402fa40b96810bd572e167dfed0f"
 PKG_LICENSE="GPL"
 PKG_URL="https://www.kernel.org/pub/linux/utils/util-linux/v$(get_pkg_version_maj_min)/${PKG_NAME}-${PKG_VERSION}.tar.xz"
-PKG_DEPENDS_HOST="ccache:host autoconf:host automake:host intltool:host libtool:host pkg-config:host"
+PKG_DEPENDS_HOST="autoconf:host automake:host intltool:host libtool:host pkg-config:host gcc:bootstrap"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_DEPENDS_INIT="toolchain"
 PKG_LONGDESC="A large variety of low-level system utilities that are necessary for a Linux system to function."
@@ -61,8 +61,8 @@ if [ "${SWAP_SUPPORT}" = "yes" ]; then
   PKG_CONFIGURE_OPTS_TARGET+=" --enable-swapon"
 fi
 
-PKG_CONFIGURE_OPTS_HOST="--enable-static \
-                         --disable-shared \
+PKG_CONFIGURE_OPTS_HOST="--disable-static \
+                         --enable-shared \
                          ${UTILLINUX_CONFIG_DEFAULT} \
                          --enable-uuidgen \
                          --enable-libuuid \

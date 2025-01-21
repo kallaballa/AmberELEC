@@ -7,9 +7,11 @@ PKG_SHA256="fa7b581bdd38c5751668243ff9d2ebaee7c45753358cbb310fb50cfcd3a8081b"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.meego.com"
 PKG_URL="${DISTRO_SRC}/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
-PKG_DEPENDS_INIT="toolchain ccache:init libpng"
+PKG_DEPENDS_INIT="ccache:init libpng:init"
 PKG_DEPENDS_TARGET="toolchain libpng"
 PKG_LONGDESC="Boot splash screen based on Fedora's Plymouth code"
+
+PKG_CONFIGURE_OPTS_HOST="--enable-static --disable-shared"
 
 if [ "${UVESAFB_SUPPORT}" = yes ]; then
   PKG_DEPENDS_INIT="${PKG_DEPENDS_INIT} v86d:init"

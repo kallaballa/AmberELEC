@@ -11,8 +11,8 @@ PKG_URL="http://ftpmirror.gnu.org/libmicrohttpd/${PKG_NAME}-${PKG_VERSION}.tar.g
 PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="A small C library that is supposed to make it easy to run an HTTP server as part of another application."
 
-PKG_CONFIGURE_OPTS_TARGET="--disable-shared \
-                           --enable-static \
+PKG_CONFIGURE_OPTS_TARGET="--enable-shared \
+                           --disable-static \
                            --disable-curl \
                            --disable-https \
                            --with-libgcrypt-prefix=${SYSROOT_PREFIX}/usr"

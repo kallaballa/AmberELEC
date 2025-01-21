@@ -11,8 +11,8 @@ PKG_DEPENDS_TARGET="toolchain util-macros xcb-proto libpthread-stubs libXau"
 PKG_LONGDESC="X C-language Bindings library."
 PKG_BUILD_FLAGS="+pic"
 
-PKG_CONFIGURE_OPTS_TARGET="--enable-static \
-                           --disable-shared \
+PKG_CONFIGURE_OPTS_TARGET="--disable-static \
+                           --enable-shared \
                            --disable-screensaver \
                            --disable-xprint \
                            --disable-selinux \

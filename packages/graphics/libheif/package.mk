@@ -12,8 +12,8 @@ PKG_LONGDESC="A HEIF file format decoder and encoder."
 PKG_BUILD_FLAGS="+pic"
 PKG_TOOLCHAIN="configure"
 
-PKG_CONFIGURE_OPTS_TARGET="--enable-static \
-                           --disable-shared \
+PKG_CONFIGURE_OPTS_TARGET="--disable-static \
+                           --enable-shared \
                            --disable-go \
                            --disable-examples \
                            --disable-tests"

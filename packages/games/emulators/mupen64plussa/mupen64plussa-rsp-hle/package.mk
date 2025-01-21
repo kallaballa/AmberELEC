@@ -7,7 +7,7 @@ PKG_SHA256="ad9903a03dbbfba22402993c1f45932bff3ed1cf9673df97d9c3c9146dc60d73"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/mupen64plus/mupen64plus-rsp-hle"
 PKG_URL="https://github.com/mupen64plus/mupen64plus-rsp-hle/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain ${OPENGLES} libpng SDL2 SDL2_net zlib freetype nasm:host mupen64plussa-core"
+PKG_DEPENDS_TARGET="toolchain mesa libpng SDL2 SDL2_net zlib freetype nasm:host mupen64plussa-core"
 PKG_LONGDESC="Mupen64Plus Standalone RSP HLE"
 PKG_TOOLCHAIN="manual"
 

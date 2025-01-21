@@ -7,7 +7,7 @@ PKG_SHA256="7f0a430929cf76a532c08aa19550663fb2a5505d89fa20183657f5e1f2ec4bac"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/mupen64plus/mupen64plus-core"
 PKG_URL="https://github.com/mupen64plus/mupen64plus-core/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain ${OPENGLES} boost libpng SDL2 SDL2_net zlib freetype nasm:host"
+PKG_DEPENDS_TARGET="toolchain mesa boost libpng SDL2 SDL2_net zlib freetype nasm:host"
 PKG_LONGDESC="Mupen64Plus Standalone"
 PKG_TOOLCHAIN="manual"
 

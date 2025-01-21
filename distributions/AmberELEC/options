@@ -11,22 +11,22 @@
   HARDENING_SUPPORT="no"
 
 # Name of the Distro to build (full name, without special characters)
-  DISTRONAME="AmberELEC"
+  DISTRONAME="NixELEC"
 
 # short project description
-  DESCRIPTION="An Open Source firmware."
+  DESCRIPTION="An Open Source firmware with wayland and nix-os support forked from AmberELEC"
 
 # Distribution Home URL
-  HOME_URL="https://github.com/AmberELEC/AmberELEC"
+  HOME_URL="https://github.com/kallaballa/NixELEC"
 
 # Documentation URL
-  WIKI_URL="https://amberelec.org"
+  WIKI_URL=""
 
 # Where to report bugs
-  BUG_REPORT_URL="https://github.com/AmberELEC/AmberELEC/issues"
+  BUG_REPORT_URL="https://github.com/kallaballa/NixELEC/issues"
 
 # Root password to integrate in the target system
-  ROOT_PASSWORD="amberelec"
+  ROOT_PASSWORD="nixelec"
 
 # Install glibc locales to the build (yes / no)
   GLIBC_LOCALES="yes"
@@ -78,7 +78,7 @@
 # Xorg Graphic drivers to use (all / i915,i965,r200,r300,r600,nvidia)
 # Space separated list is supported,
 # e.g. GRAPHIC_DRIVERS="i915 i965 r300 r600 radeonsi nvidia"
-  GRAPHIC_DRIVERS="fbdev"
+  GRAPHIC_DRIVERS=""
 
 # Support for partitioning and formating disks in initramfs (yes / no)
 # This adds support for parted and mkfs.ext3/4 to initramfs for OEM usage
@@ -109,7 +109,7 @@
 
 # Distribution Specific source location
   DISTRO_MIRROR="http://sources.libreelec.tv/mirror"
-  DISTRO_SRC="https://github.com/AmberELEC/AmberELEC"
+  DISTRO_SRC="https://github.com/kallaballa/NixELEC"
 
 # Default size of system partition, in MB, eg. 512
   SYSTEM_SIZE=2048
@@ -120,7 +120,7 @@
   GET_HANDLER_SUPPORT="archive git file"
 
 # Partition labels for USB/SD installation media
-  DISTRO_BOOTLABEL="AMBRELC"
+  DISTRO_BOOTLABEL="NIXELEC"
   DISTRO_DISKLABEL="STORAGE"
 
 # Settings package name - blank if not required

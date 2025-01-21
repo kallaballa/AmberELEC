@@ -15,10 +15,7 @@ PKG_TOOLCHAIN="meson"
 
 get_graphicdrivers
 
-PKG_MESON_OPTS_TARGET="-Dgallium-drivers=panfrost \
-                       -Dgallium-extra-hud=false \
-                       -Dgallium-nine=false \
-                       -Dgallium-opencl=disabled \
+PKG_MESON_OPTS_TARGET="-Dgallium-drivers=panfrost,softpipe \
                        -Dshader-cache=true \
                        -Dshared-glapi=true \
 		       -Dtools=panfrost \
@@ -33,83 +30,55 @@ PKG_MESON_OPTS_TARGET="-Dgallium-drivers=panfrost \
                        -Dbuild-tests=false \
 		       -Dbuild-aco-tests=false \
                        -Dselinux=false \
-                       -Dosmesa=false \
+                       -Dosmesa=true \
 		       -Dgles1=true \
 		       -Dgles2=true \
-		       -Dvulkan-layers=device-select \
-		       -Dvulkan-drivers= \
-		       -Dlegacy-x11=dri2 \
-                       -Dtools="
+		       -Dvulkan-drivers=panfrost \
+		       -Dglx-direct=true \
+                      -Dlegacy-x11=dri2"
 			
 
-PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} xorgproto libX11 libXrandr libXfixes libxshmfence libXxf86vm" #xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr"
+  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} xorgproto libX11 libXrandr libXfixes libxshmfence libXxf86vm" #xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr"
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} wayland wayland-protocols"
   PKG_MESON_OPTS_TARGET+=" -Dplatforms=wayland,x11 -Dglx=dri"
 
-if [ "${LLVM_SUPPORT}" = "yes" ]; then
-  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} elfutils llvm"
-  export LLVM_CONFIG="${SYSROOT_PREFIX}/usr/bin/llvm-config-host"
-  PKG_MESON_OPTS_TARGET+=" -Dllvm=true"
-else
+#  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} elfutils llvm"
+#  export LLVM_CONFIG="${SYSROOT_PREFIX}/usr/bin/llvm-config-host"
   PKG_MESON_OPTS_TARGET+=" -Dllvm=false"
-fi
-
-if [ "${VDPAU_SUPPORT}" = "yes" -a "${DISPLAYSERVER}" = "x11" ]; then
-  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} libvdpau"
-  PKG_MESON_OPTS_TARGET+=" -Dgallium-vdpau=true"
-else
   PKG_MESON_OPTS_TARGET+=" -Dgallium-vdpau=false"
-fi
-
-if [ "${VAAPI_SUPPORT}" = "yes" ] && listcontains "${GRAPHIC_DRIVERS}" "(r600|radeonsi)"; then
-  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} libva"
-  PKG_MESON_OPTS_TARGET+=" -Dgallium-va=true"
-else
   PKG_MESON_OPTS_TARGET+=" -Dgallium-va=false"
-fi
-
-if listcontains "${GRAPHIC_DRIVERS}" "vmware"; then
-  PKG_MESON_OPTS_TARGET+=" -Dgallium-xa=true"
-else
   PKG_MESON_OPTS_TARGET+=" -Dgallium-xa=false"
-fi
 
-
-# Temporary workaround:
-# Listed libraries are static, while mesa expects shared ones. This breaks the
-# dependency tracking. The following has some ideas on how to address that.
-# https://github.com/LibreELEC/LibreELEC.tv/pull/2163
-#pre_configure_target() {
-#  if [ "${DISPLAYSERVER}" = "x11" ]; then
-#    export LIBS="-lxcb-dri3 -lxcb-dri2 -lxcb-xfixes -lxcb-present -lxcb-sync -lxshmfence -lz"
-#  fi
-#}
 
 post_makeinstall_target() {
-#    cp ${PKG_REAL_BUILD}/src/mapi/shared-glapi/libglapi.so.0.0.0 ${INSTALL}/usr/lib/libglapi.so.0.0.0
-#    ln -sf ${INSTALL}/usr/lib/libglapi.so.0.0.0 ${INSTALL}/usr/lib/libglapi.so.0
-#    ln -sf ${INSTALL}/usr/lib/libglapi.so.0.0.0 ${INSTALL}/usr/lib/libglapi.so
+    mkdir -p  ${SYSROOT_PREFIX}/usr/include/linux/
+    cp ${PKG_BUILD}/include/drm-uapi/sync_file.h ${SYSROOT_PREFIX}/usr/include/linux/
 
-#    cp ${PKG_REAL_BUILD}/src/glx/libGL.so.1.2.0 ${INSTALL}/usr/lib/libGL.so
-#    ln -sf ${INSTALL}/usr/lib/libGL.so ${INSTALL}/usr/lib/libGL.so.1
-#    ln -sf ${INSTALL}/usr/lib/libGL.so.1 ${INSTALL}/usr/lib/libGL.so.1.2.0
-    
-#    cp ${PKG_REAL_BUILD}/src/mapi/es1api/libGLESv1_CM.so.1.1.0 ${INSTALL}/usr/lib/libGLESv1_CM.so
-#    ln -sf ${INSTALL}/usr/lib/libGLESv1_CM.so ${INSTALL}/usr/lib/libGLESv1_CM.so.1
-#    ln -sf ${INSTALL}/usr/lib/libGLESv1_CM.so.1 ${INSTALL}/usr/lib/libGLESv1_CM.so.1.1.0
+    rm -rf ${SYSROOT_PREFIX}/usr/lib/libGLESv3.so*
+    rm -rf ${SYSROOT_PREFIX}/usr/lib/libGL.so*
 
-#    cp ${PKG_REAL_BUILD}/src/mapi/es2api/libGLESv2.so.2.0.0 ${INSTALL}/usr/lib/libGLESv2.so
-#    ln -sf ${INSTALL}/usr/lib/libGLESv2.so ${INSTALL}/usr/lib/libGLESv2.so.2
-#    ln -sf ${INSTALL}/usr/lib/libGLESv2.so.2 ${INSTALL}/usr/lib/libGLESv2.so.2.0.0
+    cp ${PKG_REAL_BUILD}/src/mapi/es2api/libGLESv2.so.2.0.0 ${SYSROOT_PREFIX}/usr/lib/libGLESv3.so
+    cp ${PKG_REAL_BUILD}/src/glx/libGL.so.1.2.0 ${SYSROOT_PREFIX}/usr/lib/libGL.so
+
+    rm -rf ${INSTALL}/usr/lib/libGLESv3.so*
+    rm -rf ${INSTALL}/usr/lib/libGL.so*
 
     cp ${PKG_REAL_BUILD}/src/mapi/es2api/libGLESv2.so.2.0.0 ${INSTALL}/usr/lib/libGLESv3.so
-    cp ${PKG_REAL_BUILD}/src/mapi/es2api/libGLESv2.so.2.0.0 ${SYSROOT_PREFIX}/usr/lib/libGLESv3.so
+    cp ${PKG_REAL_BUILD}/src/glx/libGL.so.1.2.0 ${INSTALL}/usr/lib/libGL.so
+
+    cd ${INSTALL}/usr/lib/
+    ln -sf libGL.so libGL.so.1
+    ln -sf libGL.so libGL.so.1.2.0
+
+    cd ${SYSROOT_PREFIX}/usr/lib/
+    ln -sf libGL.so libGL.so.1
+    ln -sf libGL.so libGL.so.1.2.0
 
     cd ${INSTALL}/usr/lib/
     ln -sf libGLESv3.so libGLESv3.so.3
     ln -sf libGLESv3.so libGLESv3.so.3.0.0
 
-    cd ${SYSROOT_PREFIX}/usr/lib/
-    ln -sf libGLESv3.so libGLESv3.so.3
-    ln -sf libGLESv3.so libGLESv3.so.3.0.0
+   cd ${SYSROOT_PREFIX}/usr/lib/
+   ln -sf libGLESv3.so libGLESv3.so.3
+   ln -sf libGLESv3.so libGLESv3.so.3.0.0
 }

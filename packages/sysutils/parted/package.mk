@@ -13,7 +13,7 @@ PKG_DEPENDS_INIT="toolchain util-linux:init parted"
 PKG_LONGDESC="GNU Parted is a program for creating, destroying, resizing, checking and copying partitions."
 
 PKG_CONFIGURE_OPTS_TARGET="--disable-device-mapper \
-                           --disable-shared \
+                           --enable-shared \
                            --without-readline \
                            --disable-rpath \
                            --with-gnu-ld"

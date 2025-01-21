@@ -9,6 +9,14 @@ PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/besser82/libxcrypt"
 PKG_URL="https://blueprints.launchpad.net/ubuntu/+archive/primary/+sourcefiles/libxcrypt/1:4.4.36-4build1/${PKG_NAME}_${PKG_VERSION}.orig.tar.xz"
 PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_HOST="autotools:host gcc:bootstrap"
 PKG_LONGDESC="Extended crypt library for descrypt, md5crypt, bcrypt, and others"
 PKG_TOOLCHAIN="autotools"
 PKG_CONFIGURE_OPTS_TARGET="--disable-werror"
+PKG_CONFIGURE_OPTS_HOST="--disable-werror"
+
+pre_configure_target() {
+#  cd ${PKG_BUILD}
+#  ./autogen.sh
+  return 0;
+}

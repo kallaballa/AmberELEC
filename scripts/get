@@ -46,8 +46,9 @@ if [ -n "${PKG_URL}" -a -n "${PKG_SOURCE_NAME}" ]; then
     if [ ! -f "${get_handler}" ]; then
       die "ERROR: get handler \"${get_handler}\" does not exist, unable to get package ${1} - aborting!"
     fi
-
-    . "${get_handler}"
+    exec 200>/tmp/get.lock
+    flock -w 10000000 200
+    source "${get_handler}"
   fi
 fi
 

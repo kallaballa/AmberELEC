@@ -34,16 +34,16 @@
 
   # Mali GPU family
     MALI_FAMILY="g31"
-    OPENGLES="libmali"
+    OPENGLES="mesa"
 
   # kernel serial console
-    EXTRA_CMDLINE="console=ttyFIQ0 console=tty0 net.iframes=0 fbcon=rotate:3 ssh consoleblank=0"
+    EXTRA_CMDLINE="console=ttyFIQ0 console=tty0 net.iframes=0 fbcon=rotate:3 ssh consoleblank=0 systemd.show_status=0 loglevel=0 panic=20"
 
     LINUX="RG351P"
     UBOOT_SYSTEM="rg351p"
 
   # additional packages to install
-    ADDITIONAL_PACKAGES="dtc amberelec"
+    ADDITIONAL_PACKAGES="amberelec weston util-linux dtc nix"
 
   # additional drivers to install:
   # for a list of additional drivers see packages/linux-drivers
@@ -61,13 +61,13 @@
   BLUETOOTH_SUPPORT="yes"
 
   # build and install Avahi (Zeroconf) daemon (yes / no)
-  AVAHI_DAEMON="no"
+  AVAHI_DAEMON="yes"
 
   # build with NFS support (mounting nfs shares via the OS) (yes / no)
   NFS_SUPPORT="no"
 
   # build with Samba Client support (mounting samba shares via the OS) (yes / no)
-  SAMBA_SUPPORT="no"
+  SAMBA_SUPPORT="yes"
 
   # build and install Samba Server (yes / no)
   SAMBA_SERVER="yes"
@@ -110,3 +110,4 @@
 
   # htop tool (yes / no)
   HTOP_TOOL="yes"
+

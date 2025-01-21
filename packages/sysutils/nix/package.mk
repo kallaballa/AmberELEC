@@ -35,3 +35,7 @@ post_makeinstall_target() {
   sudo chown -R "${USER}" ${INSTALL}
   sudo chmod -R u+rw ${INSTALL}
 }
+
+post_install() {
+  enable_service nix-copy.service
+}

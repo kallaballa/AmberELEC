@@ -115,7 +115,7 @@ CMAKE_GENERATOR_NINJA="-GNinja \
 # configure TARGET build defaults
 TARGET_CONFIGURE_OPTS="--host=${TARGET_NAME} \
                        --build=${HOST_NAME} \
-                       --prefix=/usr \
+		       --prefix=/usr \
                        --bindir=/usr/bin \
                        --sbindir=/usr/sbin \
                        --sysconfdir=/etc \
@@ -139,6 +139,7 @@ TARGET_MESON_OPTS="--prefix=/usr \
                    --localstatedir=/var \
                    --buildtype=${MESON_BUILD_TYPE}"
 
+
 # configure HOST build defaults
 HOST_CONFIGURE_OPTS="--host=${HOST_NAME} \
                      --build=${HOST_NAME} \
@@ -148,7 +149,7 @@ HOST_CONFIGURE_OPTS="--host=${HOST_NAME} \
                      --sysconfdir=${TOOLCHAIN}/etc \
                      --libexecdir=${TOOLCHAIN}/lib \
                      --localstatedir=${TOOLCHAIN}/var \
-                     --disable-static \
+		     --disable-static \
                      --enable-shared"
 
 HOST_CMAKE_OPTS="${CMAKE_GENERATOR} \
@@ -272,8 +273,8 @@ else
       ;;
     "meson:bootstrap")
       create_meson_conf ${TARGET} ${MESON_CONF}
-      echo "Executing (bootstrap): meson ${BOOTSTRAP_MESON_OPTS} --cross-file=${MESON_CONF} ${PKG_MESON_OPTS_BOOTSTRAP} $(dirname ${PKG_MESON_SCRIPT})" | tr -s " "
-      meson ${BOOTSTRAP_MESON_OPTS} --cross-file=${MESON_CONF} ${PKG_MESON_OPTS_BOOTSTRAP} $(dirname ${PKG_MESON_SCRIPT})
+      echo "Executing (bootstrap): meson ${BOOTSTRAP_MESON_OPTS} --native-file=${MESON_CONF} ${PKG_MESON_OPTS_BOOTSTRAP} $(dirname ${PKG_MESON_SCRIPT})" | tr -s " "
+      meson ${BOOTSTRAP_MESON_OPTS} --native-file=${MESON_CONF} ${PKG_MESON_OPTS_BOOTSTRAP} $(dirname ${PKG_MESON_SCRIPT})
       ;;
 
     # cmake builds with ninja

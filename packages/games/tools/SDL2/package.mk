@@ -6,15 +6,15 @@ PKG_VERSION="2.30.4"
 PKG_LICENSE="GPL"
 PKG_SITE="https://www.libsdl.org/"
 PKG_URL="https://www.libsdl.org/release/SDL2-${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain alsa-lib systemd dbus pulseaudio libsamplerate wayland librga xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr libXcursor"
-PKG_DEPENDS_HOST="toolchain:host distutilscross:host"
+PKG_DEPENDS_TARGET="toolchain alsa-lib systemd dbus pulseaudio libsamplerate weston librga xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr libXcursor"
+PKG_DEPENDS_HOST="autotools:host distutilscross:host"
 PKG_LONGDESC="Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware."
 
 PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} mesa"
 
-if [ "${DEVICE}" = "RG351P" ] || [ "${DEVICE}" = "RG552" ]; then
-  PKG_PATCH_DIRS="rotation"
-fi
+#if [ "${DEVICE}" = "RG351P" ] || [ "${DEVICE}" = "RG552" ]; then
+#  PKG_PATCH_DIRS="rotation"
+#fi
 
 pre_make_host() {
   sed -i "s| -lrga||g" ${PKG_BUILD}/CMakeLists.txt
@@ -44,7 +44,7 @@ pre_configure_target(){
                          -DSDL_DUMMYAUDIO=OFF \
                          -DSDL_WAYLAND=ON \
                          -DSDL_WAYLAND_QT_TOUCH=ON \
-                         -DSDL_WAYLAND_SHARED=ON \
+                         -DSDL_WAYLAND_SHARED=OFF \
                          -DSDL_COCOA=OFF \
                          -DSDL_DIRECTFB=OFF \
                          -DSDL_VIVANTE=OFF \
@@ -64,8 +64,7 @@ pre_configure_target(){
                          -DSDL_VULKAN=OFF \
                          -DSDL_KMSDRM=OFF \
                          -DSDL_PULSEAUDIO=ON"
-   return 0;
-#  export LDFLAGS="${LDFLAGS} -lrga"
+  export LDFLAGS="${LDFLAGS} -lrga"
 }
 
 post_makeinstall_target() {

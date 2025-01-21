@@ -11,8 +11,8 @@ PKG_DEPENDS_TARGET="toolchain libjpeg-turbo lcms2"
 PKG_LONGDESC="A library for reading RAW files obtained from digital photo cameras (CRW/CR2, NEF, RAF, DNG, and others)"
 PKG_BUILD_FLAGS="+pic"
 
-PKG_CONFIGURE_OPTS_TARGET="--enable-static \
-                           --disable-shared \
+PKG_CONFIGURE_OPTS_TARGET="--disable-static \
+                           --enable-shared \
                            --disable-openmp \
                            --enable-jpeg \
                            --disable-jasper \

@@ -15,8 +15,8 @@ PKG_BUILD_FLAGS="+pic"
 
 PKG_CONFIGURE_OPTS_TARGET="ac_cv_func_strlcat=no \
                            ac_cv_func_strlcpy=no \
-                           --enable-static \
-                           --disable-shared \
+                           --disable-static \
+                           --enable-shared \
                            --disable-python"
 
 pre_configure_target() {

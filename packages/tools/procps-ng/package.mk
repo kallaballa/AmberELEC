@@ -14,9 +14,9 @@ PKG_BUILD_FLAGS="+pic"
 
 PKG_CONFIGURE_OPTS_TARGET="ac_cv_func_malloc_0_nonnull=yes \
                            ac_cv_func_realloc_0_nonnull=yes \
-                           --disable-shared \
+                           --enable-shared \
                            --disable-modern-top \
-                           --enable-static"
+                           --disable-static"
 
 PKG_MAKE_OPTS_TARGET="free top/top proc/libprocps.la proc/libprocps.pc"
 

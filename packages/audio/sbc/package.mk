@@ -12,7 +12,7 @@ PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="standalone SBC library"
 PKG_BUILD_FLAGS="+pic"
 
-PKG_CONFIGURE_OPTS_TARGET="--enable-static \
-                           --disable-shared \
+PKG_CONFIGURE_OPTS_TARGET="--disable-static \
+                           --enable-shared \
                            --disable-tools \
                            --disable-tester"

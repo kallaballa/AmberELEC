@@ -8,6 +8,8 @@ PKG_URL="https://downloads.rclone.org/v${PKG_VERSION}/rclone-v${PKG_VERSION}-lin
 PKG_SECTION="tools"
 PKG_SHORTDESC="rsync for cloud storage"
 PKG_TOOLCHAIN="manual"
+PKG_DEPENDS_HOST="unzip:host coreutils:host"
+PKG_DEPENDS_TARGET="unzip:host coreutils:host"
 
 pre_unpack() {
   unzip sources/rclone/rclone-${PKG_VERSION}.zip -d ${PKG_BUILD}/

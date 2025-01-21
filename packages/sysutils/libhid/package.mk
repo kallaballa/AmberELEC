@@ -11,8 +11,8 @@ PKG_DEPENDS_TARGET="toolchain libusb-compat libusb"
 PKG_LONGDESC="libhid provides a generic and flexible way to access and interact with USB HID devices."
 PKG_TOOLCHAIN="autotools"
 
-PKG_CONFIGURE_OPTS_TARGET="--disable-shared \
-            --enable-static \
+PKG_CONFIGURE_OPTS_TARGET="--enable-shared \
+            --disable-static \
             --disable-werror \
             --disable-swig"
 

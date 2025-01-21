@@ -17,8 +17,8 @@ PKG_CONFIGURE_OPTS_TARGET="--host=${TARGET_NAME} \
             --includedir=/usr/include/iconv \
             --libdir=/usr/lib/iconv \
             --sysconfdir=/etc \
-            --enable-static \
-            --disable-shared \
+            --disable-static \
+            --enable-shared \
             --disable-nls \
             --disable-extra-encodings \
             --with-gnu-ld"

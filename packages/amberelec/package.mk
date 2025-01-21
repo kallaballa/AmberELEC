@@ -6,7 +6,7 @@
 PKG_NAME="amberelec"
 PKG_VERSION="1.0"
 PKG_LICENSE="GPLv3"
-PKG_DEPENDS_TARGET="toolchain ${OPENGLES} emulationstation retroarch retrorun klbi"
+PKG_DEPENDS_TARGET="toolchain mesa emulationstation retroarch retrorun klbi wget grep sed"
 PKG_LONGDESC="AmberELEC Meta Package"
 PKG_TOOLCHAIN="make"
 
@@ -33,7 +33,7 @@ else
   PKG_EMUS+=" advancemame ppssppsa amiberry hatarisa openbor scummvmsa solarus hypseus-singe ecwolf lzdoom gzdoom raze drastic duckstation mupen64plussa piemu yabasanshiroSA"
 fi
 
-PKG_TOOLS="bash dialog grep wget ffmpeg libjpeg-turbo common-shaders glsl-shaders MC util-linux xmlstarlet sixaxis jslisten evtest mpv bluetool rs97-commander-sdl2 jslisten gnupg gzip valgrind strace gdb apitrace rg351p-js2xbox odroidgoa-utils rs97-commander-sdl2 351files rclone syncthing plymouth-lite imagemagick jstest-sdl sdljoytest evdev-joystick gptokeyb fbgrab"
+PKG_TOOLS="bash dialog grep wget ffmpeg libjpeg-turbo common-shaders glsl-shaders util-linux xmlstarlet sixaxis jslisten evtest mpv bluetool rs97-commander-sdl2 jslisten gnupg gzip valgrind strace gdb apitrace rg351p-js2xbox odroidgoa-utils rs97-commander-sdl2 351files rclone syncthing plymouth-lite imagemagick jstest-sdl sdljoytest evdev-joystick gptokeyb fbgrab"
 PKG_RETROPIE_DEP="pyudev six git dbus-python coreutils"
 PKG_DEPENDS_TARGET+=" ${PKG_TOOLS} ${PKG_RETROPIE_DEP} ${PKG_EMUS} ports webui"
 

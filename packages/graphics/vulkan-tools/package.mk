@@ -13,6 +13,6 @@ PKG_LONGDESC="Khronos official Vulkan Tools and Utilities for Windows, Linux, An
 
 PKG_CMAKE_OPTS_TARGET="-DBUILD_WSI_XCB_SUPPORT=OFF \
                         -DBUILD_WSI_XLIB_SUPPORT=OFF \
-                        -DBUILD_WSI_WAYLAND_SUPPORT=OFF \
+                        -DBUILD_WSI_WAYLAND_SUPPORT=ON \
                         -DBUILD_CUBE=OFF"
 

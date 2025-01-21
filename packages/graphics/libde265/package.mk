@@ -12,8 +12,8 @@ PKG_LONGDESC="Open h.265 video codec implementation."
 PKG_BUILD_FLAGS="+pic"
 PKG_TOOLCHAIN="configure"
 
-PKG_CONFIGURE_OPTS_TARGET="--enable-static \
-                           --disable-shared \
+PKG_CONFIGURE_OPTS_TARGET="--disable-static \
+                           --enable-shared \
                            --disable-encoder \
                            --disable-sherlock265"
 

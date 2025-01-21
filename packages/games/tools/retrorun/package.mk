@@ -6,13 +6,14 @@ PKG_VERSION="95ac0bf3a921beefee8b3bbf2faf89eef18f9b3a"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/AmberELEC/retrorun"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain libdrm libpng linux libevdev librga openal-soft"
+PKG_DEPENDS_TARGET="toolchain libdrm libpng linux libevdev librga openal-soft zlib"
 PKG_TOOLCHAIN="make"
 
 pre_configure_target() {
   CFLAGS+=" -I$(get_build_dir libdrm)/include/drm"
   CFLAGS+=" -I$(get_build_dir linux)/include/uapi"
   CFLAGS+=" -I$(get_build_dir linux)/tools/include"
+  LDFLAGS="-lpng16 -lz"
 }
 
 make_target() {

@@ -7,7 +7,7 @@ PKG_SHA256="7ce0bd97b095907fd4960c771364c549a54547877b5128af42c73a9257fbec6b"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/flycast"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain ${OPENGLES}"
+PKG_DEPENDS_TARGET="toolchain mesa"
 PKG_LONGDESC="Flycast is a multiplatform Sega Dreamcast emulator"
 PKG_TOOLCHAIN="make"
 

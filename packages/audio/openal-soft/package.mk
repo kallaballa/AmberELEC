@@ -8,6 +8,7 @@ PKG_LICENSE="GPL"
 PKG_SITE="http://www.openal.org/"
 PKG_URL="https://github.com/kcat/openal-soft/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain alsa-lib openal-soft:host"
+PKG_DEPENDS_HOST="gcc:host"
 PKG_LONGDESC="OpenAL the Open Audio Library"
 
 configure_package() {

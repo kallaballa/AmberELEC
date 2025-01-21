@@ -12,7 +12,7 @@ PKG_LONGDESC="Example KMS/GBM/EGL application"
 PKG_TOOLCHAIN="autotools"
 
 if [ "${OPENGLES_SUPPORT}" = "yes" ]; then
-  PKG_DEPENDS_TARGET+=" ${OPENGLES}"
+  PKG_DEPENDS_TARGET+=" mesa"
 elif [ "${OPENGL_SUPPORT}" = "yes" ]; then
   echo "kmscube only supports OpenGLESv2"
   exit 0

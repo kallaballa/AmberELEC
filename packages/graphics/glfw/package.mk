@@ -8,7 +8,7 @@ PKG_ARCH="x86_64"
 PKG_LICENSE="BSD"
 PKG_SITE="http://glfw.org"
 PKG_URL="${SOURCEFORGE_SRC}/glfw/${PKG_NAME}-${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain mesa wayland ${OPENGLES}"
+PKG_DEPENDS_TARGET="toolchain mesa wayland mesa"
 PKG_LONGDESC="provides a simple API for creating windows, contexts and surfaces, receiving input and events"
 
 if [ "${OPENGL}" = "no" ] ; then
