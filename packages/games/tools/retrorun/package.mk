@@ -6,7 +6,7 @@ PKG_VERSION="95ac0bf3a921beefee8b3bbf2faf89eef18f9b3a"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/AmberELEC/retrorun"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain libpng linux libevdev openal-soft zlib meson weston"
+PKG_DEPENDS_TARGET="toolchain libpng linux libevdev openal-soft zlib meson xwayland"
 PKG_TOOLCHAIN="make"
 
 pre_configure_target() {

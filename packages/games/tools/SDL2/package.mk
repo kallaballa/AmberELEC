@@ -6,11 +6,9 @@ PKG_VERSION="2.30.4"
 PKG_LICENSE="GPL"
 PKG_SITE="https://www.libsdl.org/"
 PKG_URL="https://www.libsdl.org/release/SDL2-${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain alsa-lib systemd dbus pulseaudio libsamplerate weston xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr libXcursor"
+PKG_DEPENDS_TARGET="toolchain alsa-lib systemd dbus pulseaudio libsamplerate xwayland"
 PKG_DEPENDS_HOST="autotools:host distutilscross:host"
 PKG_LONGDESC="Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware."
-
-PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} mesa"
 
 #if [ "${DEVICE}" = "RG351P" ] || [ "${DEVICE}" = "RG552" ]; then
 #  PKG_PATCH_DIRS="rotation"
@@ -60,7 +58,7 @@ pre_configure_target(){
                          -DSDL_RENDER_D3D=OFF \
                          -DSDL_X11=ON \
                          -DSDL_OPENGLES=ON \
-			 -DSDL_OPENGL=OFF \
+			 -DSDL_OPENGL=OM \
                          -DSDL_VULKAN=OFF \
                          -DSDL_KMSDRM=OFF \
                          -DSDL_PULSEAUDIO=ON"

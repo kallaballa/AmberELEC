@@ -6,7 +6,7 @@
 PKG_NAME="amberelec"
 PKG_VERSION="1.0"
 PKG_LICENSE="GPLv3"
-PKG_DEPENDS_TARGET="toolchain mesa emulationstation retroarch klbi wget grep sed"
+PKG_DEPENDS_TARGET="toolchain emulationstation retroarch klbi wget grep sed"
 PKG_LONGDESC="AmberELEC Meta Package"
 PKG_TOOLCHAIN="make"
 
@@ -15,10 +15,12 @@ then
   PKG_EMUS=""
 else
 # REMOVED sameboy
+# REMOVED parallel-n64
   LIBRETRO_CORES="81 a5200 arduous atari800 beetle-gba beetle-lynx beetle-ngp beetle-pce beetle-pce-fast beetle-pcfx beetle-supafaust beetle-supergrafx beetle-vb beetle-wswan bluemsx cap32 crocods \
                   doublecherrygb dosbox-core dosbox-pure easyrpg ep128emu fake08 fbalpha2012 fbalpha2019 fbneo fceumm flycast flycast2021 fmsx freechaf freeintv freej2me fuse-libretro gambatte \
                   gearboy gearcoleco gearsystem genesis-plus-gx genesis-plus-gx-wide gpsp gw-libretro handy hatari jaxe lowresnx mame2000 mame2003-plus mame2010 mame2015 mame2016 meowpc98 mgba mojozork \
-                  mupen64plus-nx neocd_libretro nestopia np2kai o2em opera parallel-n64 pcsx_rearmed picodrive pokemini potator ppsspp prboom prosystem puae puae2021 px68k quasi88 quicknes race same_cdi \
+                  mupen64plus-nx neocd_libretro nestopia np2kai o2em opera \
+  pcsx_rearmed picodrive pokemini potator ppsspp prboom prosystem puae puae2021 px68k quasi88 quicknes race same_cdi \
                   sameduck scummvm smsplus-gx snes9x snes9x2002 snes9x2005_plus snes9x2010 stella stella-2014 swanstation tgbdual theodore tic-80 uae4arm uw8 uzem vbam vba-next vecx vice vircon32 \
                   virtualjaguar wasm4 xmil"
 
@@ -29,8 +31,9 @@ else
   if [[ "${DEVICE}" == "RG552" ]]; then
     PKG_EMUS+=" ${LIBRETRO_CORES_EXTRA}"
   fi
-
-  PKG_EMUS+=" advancemame ppssppsa amiberry hatarisa openbor scummvmsa solarus hypseus-singe ecwolf lzdoom gzdoom raze drastic duckstation mupen64plussa piemu yabasanshiroSA"
+#removed ppssppsa
+#remove yabasanshiroSA
+  PKG_EMUS+=" advancemame amiberry hatarisa openbor scummvmsa solarus hypseus-singe ecwolf lzdoom gzdoom raze drastic duckstation mupen64plussa piemu"
 fi
 
 PKG_TOOLS="bash dialog grep wget ffmpeg libjpeg-turbo common-shaders glsl-shaders util-linux xmlstarlet sixaxis jslisten evtest mpv bluetool rs97-commander-sdl2 jslisten gnupg gzip valgrind strace gdb apitrace rg351p-js2xbox odroidgoa-utils rs97-commander-sdl2 351files rclone syncthing plymouth-lite imagemagick jstest-sdl sdljoytest evdev-joystick gptokeyb fbgrab"
@@ -132,8 +135,8 @@ post_install() {
  #   cp -r ${PKG_DIR}/gamepads/GO-Super* ${INSTALL}/etc/retroarch-joypad-autoconfig
  # fi
   ln -sf amberelec.target ${INSTALL}/usr/lib/systemd/system/default.target
-  enable_service amberelec-autostart.service
-  enable_service lastgame.service
+  #enable_service amberelec-autostart.service
+  #enable_service lastgame.service
   #if [[ "${DEVICE}" == "RG552" ]]; then
   #  enable_service fan_control.service
   #fi

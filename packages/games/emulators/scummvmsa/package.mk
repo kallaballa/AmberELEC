@@ -22,7 +22,7 @@ pre_configure_target() {
   if [[ "${DEVICE}" == RG552 ]]; then
     sed -i "s|static const int guiBaseValues\[\] = { 150, 125, 100, 75, -1 };|static const int guiBaseValues\[\] = { 250, 125, 100, 75, -1 };|g" ${PKG_BUILD}/gui/options.cpp
   fi
-  TARGET_CONFIGURE_OPTS="--host=${TARGET_NAME} --backend=sdl --with-sdl-prefix=${SYSROOT_PREFIX}/usr/bin --disable-debug --enable-release --enable-vkeybd --opengl-mode=gles2"
+  TARGET_CONFIGURE_OPTS="--host=${TARGET_NAME} --with-sdl-prefix=${SYSROOT_PREFIX}/usr/bin --disable-debug --enable-release --enable-vkeybd --opengl-mode=gl"
 
   #enable monkey4
   sed -i 's|add_engine monkey4 "Escape from Monkey Island" no|add_engine monkey4 "Escape from Monkey Island" yes|g' ${PKG_BUILD}/engines/grim/configure.engine

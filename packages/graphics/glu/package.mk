@@ -10,7 +10,7 @@ PKG_URL="https://gitlab.freedesktop.org/mesa/glu/-/archive/glu-9.0.3/glu-glu-${P
 PKG_DEPENDS_TARGET="toolchain mesa glibc"
 PKG_LONGDESC="libglu is the The OpenGL utility library"
 PKG_TOOLCHAIN="meson"
-
+PKG_MESON_OPTS_TARGET="-Dgl_provider=gl"
 pre_configure_target() {
   export CFLAGS="${CFLAGS} -Wno-error"
   export CXXFLAGS="${CFLAGS} -Wno-error"

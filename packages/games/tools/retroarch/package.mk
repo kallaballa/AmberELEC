@@ -2,30 +2,38 @@
 # Copyright (C) 2021-present AmberELEC (https://github.com/AmberELEC)
 
 PKG_NAME="retroarch"
-PKG_VERSION="1.20.0"
+PKG_VERSION="0792144fe3a7b59908b0afdb2c01722e79040360"
 PKG_SITE="https://github.com/libretro/RetroArch"
-PKG_URL="https://github.com/libretro/RetroArch/archive/refs/tags/v${PKG_VERSION}.tar.gz"
+PKG_URL="${PKG_SITE}.git"
 PKG_LICENSE="GPLv3"
-PKG_DEPENDS_TARGET="toolchain alsa-lib openssl freetype zlib retroarch-assets core-info ffmpeg libass joyutils empty mesa nss-mdns openal-soft libogg libvorbis libvorbisidec libvpx libpng weston pulseaudio flac libc xz mpv vlc"
+PKG_DEPENDS_TARGET="toolchain SDL2 alsa-lib openssl freetype zlib retroarch-assets core-info ffmpeg libass joyutils empty nss-mdns openal-soft libogg libvorbis libvorbisidec libvpx libpng pulseaudio xwayland"
 PKG_LONGDESC="Reference frontend for the libretro API."
 
+if [[ "${DEVICE}" =~ RG351 ]]; then
+  PKG_PATCH_DIRS="RG351-ui-patches"
+fi
+
+if [[ "${DEVICE}" == RG552 ]]; then
+  PKG_PATCH_DIRS="RG552-ui-patches"
+fi
+
 pre_configure_target() {
-#  sed -i 's/#include <stdint.h>/#include <stdint.h>\n#include <stdio.h>/g' ${PKG_BUILD}/input/common/wayland_common.c
-#  sed -i 's|&video_oga,$||g' ${PKG_BUILD}/gfx/video_driver.c
   TARGET_CONFIGURE_OPTS=""
   PKG_CONFIGURE_OPTS_TARGET="--disable-qt \
                              --enable-alsa \
                              --enable-udev \
                              --disable-opengl1 \
-                             --disable-opengles3 \
-                             --disable-opengl \
-                             --disable-opengl_core \
+                             --enable-opengles3_1 \
+                             --enable-opengl \
+                             --enable-opengl_core \
                              --disable-vulkan \
                              --disable-vulkan_display \
                              --enable-egl \
-                             --enable-opengles \
+			     --enable-dynamic_egl \
+			     --enable-bluetooth \
+                             --disable-opengles \
                              --enable-wayland \
-                             --disable-x11 \
+                             --enable-x11 \
                              --enable-zlib \
                              --enable-freetype \
                              --disable-discord \
@@ -37,7 +45,6 @@ pre_configure_target() {
                              --disable-tinyalsa \
                              --disable-pulse \
                              --disable-kms \
-			     --enable-screenshots \
                              --disable-mali_fbdev \
                              --disable-odroidgo2"
 
@@ -47,39 +54,39 @@ pre_configure_target() {
 
   cd ${PKG_BUILD}
 
-  #sed -i 's/if (node \&\& (strstr(node, "BAT") || strstr(node, "battery")))/if (node \&\& (strstr(node, "BAT") || strstr(node, "battery") || strstr(node, "bat")))/g' frontend/drivers/platform_unix.c
+  sed -i 's/if (node \&\& (strstr(node, "BAT") || strstr(node, "battery")))/if (node \&\& (strstr(node, "BAT") || strstr(node, "battery") || strstr(node, "bat")))/g' frontend/drivers/platform_unix.c
 }
 
-#make_target() {
-#  make HAVE_LIBRETRODB=1 HAVE_NETWORKING=1 HAVE_LAKKA=1 HAVE_ZARCH=1 HAVE_QT=0 HAVE_LANGEXTRA=1 HAVE_LAKKA_PROJECT=0 HAVE_LAKKA_SERVER=0
-#  [ $? -eq 0 ] && echo "(retroarch ok)" || { echo "(retroarch failed)" ; exit 1 ; }
-#  make -C gfx/video_filters compiler=${CC} extra_flags="${CFLAGS}"
-#  [ $? -eq 0 ] && echo "(video filters ok)" || { echo "(video filters failed)" ; exit 1 ; }
-#  make -C libretro-common/audio/dsp_filters compiler=${CC} extra_flags="${CFLAGS}"
-#  [ $? -eq 0 ] && echo "(audio filters ok)" || { echo "(audio filters failed)" ; exit 1 ; }
-#}
+make_target() {
+  make HAVE_LIBRETRODB=1 HAVE_NETWORKING=1 HAVE_LAKKA=1 HAVE_ZARCH=1 HAVE_QT=0 HAVE_LANGEXTRA=1 HAVE_LAKKA_PROJECT=0 HAVE_LAKKA_SERVER=0
+  [ $? -eq 0 ] && echo "(retroarch ok)" || { echo "(retroarch failed)" ; exit 1 ; }
+  make -C gfx/video_filters compiler=${CC} extra_flags="${CFLAGS}"
+  [ $? -eq 0 ] && echo "(video filters ok)" || { echo "(video filters failed)" ; exit 1 ; }
+  make -C libretro-common/audio/dsp_filters compiler=${CC} extra_flags="${CFLAGS}"
+  [ $? -eq 0 ] && echo "(audio filters ok)" || { echo "(audio filters failed)" ; exit 1 ; }
+}
 
-#makeinstall_target() {
-#  mkdir -p ${INSTALL}/usr/bin
-#  cp ${PKG_BUILD}/retroarch ${INSTALL}/usr/bin
+makeinstall_target() {
+  mkdir -p ${INSTALL}/usr/bin
+  cp ${PKG_BUILD}/retroarch ${INSTALL}/usr/bin
 
-# mkdir -p ${INSTALL}/usr/share/retroarch/filters
+  mkdir -p ${INSTALL}/usr/share/retroarch/filters
 
-#  mkdir -p ${INSTALL}/etc
-#  cp ${PKG_BUILD}/retroarch.cfg ${INSTALL}/etc
+  mkdir -p ${INSTALL}/etc
+  cp ${PKG_BUILD}/retroarch.cfg ${INSTALL}/etc
 
-#  mkdir -p ${INSTALL}/usr/share/retroarch/filters/video
-#  cp ${PKG_BUILD}/gfx/video_filters/*.so ${INSTALL}/usr/share/retroarch/filters/video
-#  cp ${PKG_BUILD}/gfx/video_filters/*.filt ${INSTALL}/usr/share/retroarch/filters/video
+  mkdir -p ${INSTALL}/usr/share/retroarch/filters/video
+  cp ${PKG_BUILD}/gfx/video_filters/*.so ${INSTALL}/usr/share/retroarch/filters/video
+  cp ${PKG_BUILD}/gfx/video_filters/*.filt ${INSTALL}/usr/share/retroarch/filters/video
 
-#  mkdir -p ${INSTALL}/usr/share/retroarch/filters/audio
-#  cp ${PKG_BUILD}/libretro-common/audio/dsp_filters/*.so ${INSTALL}/usr/share/retroarch/filters/audio
-#  cp ${PKG_BUILD}/libretro-common/audio/dsp_filters/*.dsp ${INSTALL}/usr/share/retroarch/filters/audio
+  mkdir -p ${INSTALL}/usr/share/retroarch/filters/audio
+  cp ${PKG_BUILD}/libretro-common/audio/dsp_filters/*.so ${INSTALL}/usr/share/retroarch/filters/audio
+  cp ${PKG_BUILD}/libretro-common/audio/dsp_filters/*.dsp ${INSTALL}/usr/share/retroarch/filters/audio
 
-#  # General configuration
-#  mkdir -p ${INSTALL}/usr/config/retroarch/
-#  cp -rf ${PKG_DIR}/sources/* ${INSTALL}/usr/config/retroarch/
-#}
+  # General configuration
+  mkdir -p ${INSTALL}/usr/config/retroarch/
+  cp -rf ${PKG_DIR}/sources/* ${INSTALL}/usr/config/retroarch/
+}
 
 post_install() {
   enable_service retroarch.service

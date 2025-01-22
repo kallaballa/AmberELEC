@@ -8,7 +8,7 @@ PKG_VERSION="3.0.9.2"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.videolan.org"
 PKG_URL="https://mirror.netcologne.de/videolan.org/${PKG_NAME}/${PKG_VERSION}/${PKG_NAME}-${PKG_VERSION}.tar.xz"
-PKG_DEPENDS_TARGET="toolchain gnutls ffmpeg libmpeg2 zlib flac libvorbis libxml2 pulseaudio x264 aom libogg weston"
+PKG_DEPENDS_TARGET="toolchain gnutls ffmpeg libmpeg2 zlib flac libvorbis libxml2 pulseaudio x264 aom libogg xwayland"
 PKG_SHORTDESC="VideoLAN multimedia player and streamer"
 PKG_LONGDESC="VLC is the VideoLAN project's media player. It plays MPEG, MPEG2, MPEG4, DivX, MOV, WMV, QuickTime, mp3, Ogg/Vorbis files, DVDs, VCDs, and multimedia streams from various network sources."
 
@@ -34,7 +34,6 @@ ENABLED_FEATURES="--enable-wayland \
             --enable-udev \
             --enable-vlc \
             --enable-pulse \
-            --enable-gles2 \
 	    --with-sysroot=${TOOLCHAIN}/aarch64-libreelec-linux-gnueabi/sysroot/usr/lib";
 
 DISABLED_FEATURES="--disable-dependency-tracking \

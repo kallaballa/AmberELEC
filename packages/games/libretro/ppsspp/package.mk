@@ -30,7 +30,7 @@ pre_configure_target() {
   if [ "${OPENGLES_SUPPORT}" = "yes" ]; then
     PKG_CMAKE_OPTS_TARGET+=" -DUSING_FBDEV=ON \
                              -DUSING_EGL=ON \
-                             -DUSING_GLES2=ON"
+                             -DUSING_GLES2=OFF"
   fi
 }
 

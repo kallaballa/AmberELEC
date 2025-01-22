@@ -6,7 +6,7 @@ PKG_VERSION="7a3c11ff970cd36ca806961fae6db94b30dd5401"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/libretro/melonds"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain mesa"
+PKG_DEPENDS_TARGET="toolchain xwayland"
 PKG_SHORTDESC="MelonDS - Nintendo DS emulator for libretro"
 PKG_TOOLCHAIN="make"
 

@@ -7,11 +7,11 @@ PKG_SHA256="7f0a430929cf76a532c08aa19550663fb2a5505d89fa20183657f5e1f2ec4bac"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/mupen64plus/mupen64plus-core"
 PKG_URL="https://github.com/mupen64plus/mupen64plus-core/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain mesa boost libpng SDL2 SDL2_net zlib freetype nasm:host"
+PKG_DEPENDS_TARGET="toolchain boost libpng SDL2 SDL2_net zlib freetype nasm:host xwayland glu"
 PKG_LONGDESC="Mupen64Plus Standalone"
 PKG_TOOLCHAIN="manual"
 
-PKG_MAKE_OPTS_TARGET+="USE_GLES=1"
+PKG_MAKE_OPTS_TARGET+="USE_GLES=0"
 
 pre_configure_target() {
   sed -i 's/\-O[23]//' ${PKG_BUILD}/projects/unix/Makefile
@@ -19,7 +19,7 @@ pre_configure_target() {
 
 make_target() {
   export HOST_CPU=aarch64
-  export USE_GLES=1
+  export USE_GLES=0
   export SDL_CFLAGS="-I${SYSROOT_PREFIX}/usr/include/SDL2 -D_REENTRANT"
   export SDL_LDLIBS="-lSDL2_net -lSDL2"
   export CROSS_COMPILE="${TARGET_PREFIX}"

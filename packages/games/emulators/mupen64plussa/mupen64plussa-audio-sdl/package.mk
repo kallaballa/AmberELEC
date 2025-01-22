@@ -7,11 +7,11 @@ PKG_SHA256="234ea4727e318709f37845a9b2af938df2f2c43491c632d882c91799da0d53b9"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/mupen64plus/mupen64plus-audio-sdl"
 PKG_URL="https://github.com/mupen64plus/mupen64plus-audio-sdl/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain mesa libpng SDL2 SDL2_net zlib freetype nasm:host mupen64plussa-core"
+PKG_DEPENDS_TARGET="toolchain libpng SDL2 SDL2_net zlib freetype nasm:host mupen64plussa-core xwayland"
 PKG_LONGDESC="Mupen64Plus Standalone Audio SDL"
 PKG_TOOLCHAIN="manual"
 
-PKG_MAKE_OPTS_TARGET+="USE_GLES=1"
+PKG_MAKE_OPTS_TARGET+="USE_GLES=0"
 
 pre_configure_target() {
   sed -i 's/\-O[23]//' ${PKG_BUILD}/projects/unix/Makefile

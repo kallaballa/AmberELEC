@@ -8,7 +8,7 @@ PKG_SHA256="eadbad9e9ab30b25f5520fbfde99fae4a92a1ae3c0257a8d68569a4651e30e02"
 PKG_LICENSE="GPL-3.0"
 PKG_SITE="https://github.com/nyanmisaka/ffmpeg-rockchip/"
 PKG_URL="http://ffmpeg.org/releases/ffmpeg-${PKG_VERSION}.tar.xz"
-PKG_DEPENDS_TARGET="toolchain zlib bzip2 openssl speex rkmpp mesa waf:host aom dav1d libaacs libamcodec libass libbdplus libbluray libdvbpsi libdvdcss libdvdnav libdvdread libhdhomerun libmpeg2 libva libvdpau rtmpdump x264 openal-soft gmp libgcrypt libopenjpeg pulseaudio"
+PKG_DEPENDS_TARGET="toolchain zlib bzip2 openssl speex rkmpp mesa waf:host aom dav1d libaacs libamcodec libass libbdplus libbluray libdvbpsi libdvdcss libdvdnav libdvdread libhdhomerun libmpeg2 libva libvdpau rtmpdump x264 openal-soft gmp libgcrypt libopenjpeg pulseaudio xz"
 PKG_LONGDESC="FFmpeg is a complete, cross-platform solution to record, convert and stream audio and video."
 #PKG_PATCH_DIRS="libreelec v4l2-request v4l2-drmprime"
 
@@ -19,30 +19,30 @@ post_unpack() {
 # Dependencies
 get_graphicdrivers
 
-  PKG_FFMPEG_HWACCEL="--enable-opengl --enable-hwaccels --enable-rkmpp --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libass --enable-gcrypt --enable-gmp --enable-libaom --enable-libbluray --enable-libdav1d --enable-libopus --enable-libpulse --enable-libxcb  --enable-libxcb-shm --enable-openal"
+  PKG_FFMPEG_HWACCEL="--disable-sdl2 --enable-opengl --enable-hwaccels --enable-rkmpp --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libass --enable-gcrypt --enable-gmp --enable-libaom --enable-libbluray --enable-libdav1d --enable-libopus --enable-libpulse --enable-libxcb  --enable-libxcb-shm --enable-openal"
 #  PKG_NEED_UNPACK+=" $(get_pkg_directory libdrm)"
 #  PKG_FFMPEG_V4L2="--enable-v4l2_m2m --enable-libdrm"
 
   PKG_DEPENDS_TARGET+=" systemd"
   PKG_NEED_UNPACK+=" $(get_pkg_directory systemd)"
 
-  PKG_DEPENDS_TARGET+=" libva"
-  PKG_NEED_UNPACK+=" $(get_pkg_directory libva)"
-  PKG_FFMPEG_VAAPI="--enable-vaapi"
+#  PKG_DEPENDS_TARGET+=" libva"
+#  PKG_NEED_UNPACK+=" $(get_pkg_directory libva)"
+#  PKG_FFMPEG_VAAPI="--enable-vaapi"
 
   PKG_DEPENDS_TARGET+=" libdrm"
   PKG_NEED_UNPACK+=" $(get_pkg_directory libdrm)"
   PKG_FFMPEG_VAAPI=" --enable-libdrm"
 
-  PKG_DEPENDS_TARGET+=" libvdpau"
-  PKG_NEED_UNPACK+=" $(get_pkg_directory libvdpau)"
-  PKG_FFMPEG_VDPAU="--enable-vdpau"
+#  PKG_DEPENDS_TARGET+=" libvdpau"
+#  PKG_NEED_UNPACK+=" $(get_pkg_directory libvdpau)"
+#  PKG_FFMPEG_VDPAU="--enable-vdpau"
 
-if build_with_debug; then
-  PKG_FFMPEG_DEBUG="--enable-debug --disable-stripping"
-else
-  PKG_FFMPEG_DEBUG="--disable-debug --enable-stripping"
-fi
+#if build_with_debug; then
+#  PKG_FFMPEG_DEBUG="--enable-debug --disable-stripping"
+#else
+#  PKG_FFMPEG_DEBUG="--disable-debug --enable-stripping"
+#fi
 
 if target_has_feature neon; then
   PKG_FFMPEG_FPU="--enable-neon"
@@ -154,14 +154,14 @@ configure_target() {
               --enable-filters \
               --disable-avisynth \
               --enable-bzlib \
-              --disable-lzma \
+              --enable-lzma \
               --disable-alsa \
               --disable-frei0r \
               --disable-libopencore-amrnb \
               --disable-libopencore-amrwb \
               --disable-libopencv \
               --disable-libdc1394 \
-              --disable-libfreetype \
+              --enable-libfreetype \
               --disable-libgsm \
               --disable-libmp3lame \
               --enable-libopenjpeg \

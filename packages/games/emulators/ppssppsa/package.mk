@@ -7,7 +7,7 @@ PKG_VERSION="$(get_pkg_version ppsspp)"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/hrydgard/ppsspp"
 PKG_URL=""
-PKG_DEPENDS_TARGET="emulationstation toolchain mesa ffmpeg libzip SDL2 zlib zstd xz"
+PKG_DEPENDS_TARGET="emulationstation toolchain ffmpeg libzip SDL2 zlib zstd xz"
 PKG_DEPENDS_UNPACK="ppsspp"
 PKG_LONGDESC="PPSSPP Standalone"
 PKG_TOOLCHAIN="cmake-make"
@@ -23,15 +23,16 @@ fi
 
 PKG_CMAKE_OPTS_TARGET+="-DUSE_WAYLAND_WSI=OFF \
                         -DUSE_VULKAN_DISPLAY_KHR=OFF \
-                        -DUSING_FBDEV=ON \
+                        -DUSING_FBDEV=OFF \
                         -DCMAKE_BUILD_TYPE=Release \
                         -DCMAKE_SYSTEM_NAME=Linux \
                         -DCMAKE_RULE_MESSAGES=OFF \
                         -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
                         -DCMAKE_C_FLAGS_RELEASE="-DNDEBUG" \
                         -DCMAKE_CXX_FLAGS_RELEASE="-DNDEBUG" \
-                        -DUSING_EGL=OFF \
-                        -DUSING_GLES2=ON \
+                        -DUSING_EGL=ON \
+                        -DUSING_GLES2=OFF \
+			-DOPENGL_LIBRARIES='GLESv3 EGL' \
                         -DVULKAN=OFF \
                         -DARM_NO_VULKAN=ON \
                         -DUSING_X11_VULKAN=OFF \

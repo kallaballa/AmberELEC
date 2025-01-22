@@ -13,7 +13,7 @@ PKG_LONGDESC="libretro adaptation of vecx"
 PKG_TOOLCHAIN="make"
 
 make_target() {
-  make -f Makefile.libretro HAS_GPU=1 HAS_GLES=1
+  make -f Makefile.libretro HAS_GPU=1 HAS_GLES=0
 }
 
 makeinstall_target() {

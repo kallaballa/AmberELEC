@@ -8,7 +8,7 @@ PKG_LONGDESC="FreeChaF is a libretro emulation core for the Fairchild ChannelF /
 PKG_TOOLCHAIN="make"
 
 make_target() {
-  make
+  make SOURCE_DIR="${SOURCES}/${PKG_NAME}/${PKG_NAME}-${PKG_VERSION}/src/"
 }
 
 makeinstall_target() {

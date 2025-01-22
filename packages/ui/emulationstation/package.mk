@@ -4,12 +4,12 @@
 # Copyright (C) 2021-present AmberELEC (https://github.com/AmberELEC)
 
 PKG_NAME="emulationstation"
-PKG_VERSION="42c0deea05e622dda10bb2df7a9cee76e1fbce2f"
-PKG_GIT_CLONE_BRANCH="master"
+PKG_VERSION="4111537f3d69f22016f23ae40d12a346c822d7d6"
+PKG_GIT_CLONE_BRANCH="main"
 PKG_LICENSE="GPL"
-PKG_SITE="https://github.com/batocera-linux/batocera-emulationstation"
-PKG_URL="https://github.com/batocera-linux/batocera-emulationstation/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="boost toolchain SDL2 freetype curl freeimage bash rapidjson SDL2_mixer fping p7zip vlc zstd weston mesa"
+PKG_SITE="https://github.com/AmberELEC/emulationstation"
+PKG_URL="${PKG_SITE}.git"
+PKG_DEPENDS_TARGET="boost toolchain SDL2 freetype curl freeimage bash rapidjson SDL2_mixer fping p7zip vlc zstd xwayland xz"
 PKG_NEED_UNPACK="busybox"
 PKG_LONGDESC="Emulationstation emulator frontend"
 PKG_BUILD_FLAGS="+lto-parallel"
@@ -29,41 +29,41 @@ PKG_BUILD_FLAGS="+lto-parallel"
 # themes for Emulationstation
 PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} es-theme-art-book-next"
 
-PKG_CMAKE_OPTS_TARGET="-DUSE_SYSTEM_PUGIXML=0 -DGLES2=1 -DDISABLE_KODI=1 -DENABLE_FILEMANAGER=0 -DCEC=0"
+PKG_CMAKE_OPTS_TARGET=" -DUSE_SYSTEM_PUGIXML=0 -DENABLE_AMBERELEC=1 -DGL=1 -DDISABLE_KODI=1 -DENABLE_FILEMANAGER=0 -DCEC=0 -D${DEVICE}=1"
 
-#pre_configure_target() {
-#  if [ -f ~/developer_settings.conf ]; then
-#    . ~/developer_settings.conf
-#  fi
-#}
+pre_configure_target() {
+  if [ -f ~/developer_settings.conf ]; then
+    . ~/developer_settings.conf
+  fi
+}
 
-#makeinstall_target() {
-#	mkdir -p ${INSTALL}/usr/config/locale
-#	cp -rf ${PKG_BUILD}/locale/lang/* ${INSTALL}/usr/config/locale/
+makeinstall_target() {
+	mkdir -p ${INSTALL}/usr/config/locale
+	cp -rf ${PKG_BUILD}/locale/lang/* ${INSTALL}/usr/config/locale/
 
-#	mkdir -p ${INSTALL}/usr/lib
-#	ln -sf /storage/.config/emulationstation/locale ${INSTALL}/usr/lib/locale
+	mkdir -p ${INSTALL}/usr/lib
+	ln -sf /storage/.config/emulationstation/locale ${INSTALL}/usr/lib/locale
 
-#	mkdir -p ${INSTALL}/usr/config/emulationstation/resources
-#	cp -rf ${PKG_BUILD}/resources/* ${INSTALL}/usr/config/emulationstation/resources/
-#	rm -rf ${INSTALL}/usr/config/emulationstation/resources/logo.png
+	mkdir -p ${INSTALL}/usr/config/emulationstation/resources
+	cp -rf ${PKG_BUILD}/resources/* ${INSTALL}/usr/config/emulationstation/resources/
+	rm -rf ${INSTALL}/usr/config/emulationstation/resources/logo.png
 
-#	mkdir -p ${INSTALL}/usr/lib/${PKG_PYTHON_VERSION}
-#	cp -rf ${PKG_DIR}/bluez/* ${INSTALL}/usr/lib/${PKG_PYTHON_VERSION}
+	mkdir -p ${INSTALL}/usr/lib/${PKG_PYTHON_VERSION}
+	cp -rf ${PKG_DIR}/bluez/* ${INSTALL}/usr/lib/${PKG_PYTHON_VERSION}
 
-#	mkdir -p ${INSTALL}/usr/bin
-#	ln -sf /storage/.config/emulationstation/resources ${INSTALL}/usr/bin/resources
-#	cp -rf ${PKG_BUILD}/emulationstation ${INSTALL}/usr/bin
+	mkdir -p ${INSTALL}/usr/bin
+	ln -sf /storage/.config/emulationstation/resources ${INSTALL}/usr/bin/resources
+	cp -rf ${PKG_BUILD}/emulationstation ${INSTALL}/usr/bin
 
-#	mkdir -p ${INSTALL}/etc/emulationstation/
-#	ln -sf /storage/.config/emulationstation/themes ${INSTALL}/etc/emulationstation/
-#	ln -sf /usr/config/emulationstation/es_systems.cfg ${INSTALL}/etc/emulationstation/es_systems.cfg
-#
-#        cp -rf ${PKG_DIR}/config/*.cfg ${INSTALL}/usr/config/emulationstation
-#}
+	mkdir -p ${INSTALL}/etc/emulationstation/
+	ln -sf /storage/.config/emulationstation/themes ${INSTALL}/etc/emulationstation/
+	ln -sf /usr/config/emulationstation/es_systems.cfg ${INSTALL}/etc/emulationstation/es_systems.cfg
+
+        cp -rf ${PKG_DIR}/config/*.cfg ${INSTALL}/usr/config/emulationstation
+}
 
 post_install() {
 	enable_service emustation.service
-#	mkdir -p ${INSTALL}/usr/share
-#	ln -sf /storage/.config/emulationstation/locale ${INSTALL}/usr/share/locale
+	mkdir -p ${INSTALL}/usr/share
+	ln -sf /storage/.config/emulationstation/locale ${INSTALL}/usr/share/locale
 }

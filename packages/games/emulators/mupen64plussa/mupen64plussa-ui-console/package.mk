@@ -7,11 +7,11 @@ PKG_SHA256="4ac022d767fc768a251c6b466c49f03062c815933a4d8155596e5be33e2ed0c0"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/mupen64plus/mupen64plus-ui-console"
 PKG_URL="https://github.com/mupen64plus/mupen64plus-ui-console/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain mesa libpng SDL2 SDL2_net zlib freetype nasm:host mupen64plussa-core"
+PKG_DEPENDS_TARGET="toolchain libpng SDL2 SDL2_net zlib freetype nasm:host mupen64plussa-core xwayland"
 PKG_LONGDESC="Mupen64Plus Standalone Console"
 PKG_TOOLCHAIN="manual"
 
-PKG_MAKE_OPTS_TARGET+="USE_GLES=1"
+PKG_MAKE_OPTS_TARGET+="USE_GLES=0"
 
 pre_configure_target() {
   sed -i 's/\-O[23]//' ${PKG_BUILD}/projects/unix/Makefile
