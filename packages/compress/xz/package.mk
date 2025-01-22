@@ -14,16 +14,15 @@ PKG_LONGDESC="A free general-purpose data compression software with high compres
 PKG_BUILD_FLAGS="+local-cc +pic +pic:host"
 PKG_TOOLCHAIN="configure"
 
-# never build shared or k0p happens when building
-# on fedora due to host selinux/liblzma
 PKG_CONFIGURE_OPTS_HOST="--disable-shared --enable-static \
-                         --disable-lzmadec \
-                         --disable-lzmainfo \
+                         --disable-doc \
+                         --enable-lzmadec \
+                         --enable-lzmainfo \
                          --enable-lzma-links \
                          --disable-nls \
                          --disable-scripts \
                          --enable-symbol-versions=no"
 
 post_makeinstall_target() {
-  rm -rf ${INSTALL}
+  return 0;
 }

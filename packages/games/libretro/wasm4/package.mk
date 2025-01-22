@@ -6,7 +6,7 @@ PKG_VERSION="7e92c5e1d7a60efc9d01a221ce6c5af4a6349225"
 #PKG_ARCH="aarch64"
 PKG_SITE="https://github.com/aduros/wasm4"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="WASM-4 is a low-level fantasy game console for building small games with WebAssembly"
 PKG_TOOLCHAIN="cmake-make"
 

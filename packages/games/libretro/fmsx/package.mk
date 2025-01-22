@@ -8,7 +8,7 @@ PKG_SHA256="a20197dc2bf8ab01f79dc341233656053de8bd78cf8e597b6e375bf0722d2b28"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/fmsx-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="Port of fMSX 4.9 to the libretro API."
 PKG_TOOLCHAIN="make"
 

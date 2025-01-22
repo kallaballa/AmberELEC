@@ -6,7 +6,7 @@ PKG_VERSION="22115d58de5f80cfafbbeece19d723f4892ed75c"
 PKG_ARCH="aarch64"
 PKG_SITE="https://github.com/kurtjd/jaxe"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="A fully-featured, cross platform XO-CHIP/S-CHIP/CHIP-8 emulator written in C and SDL"
 PKG_TOOLCHAIN="make"
 

@@ -12,7 +12,7 @@ PKG_URL="https://github.com/AmberELEC/webui.git"
 # NOTE:
 # - linux-pam needed for login
 # - binutils needed by pam-linux as it uses pythons 'ctypes.find_library' which uses 'objdump' to find system libraries (libpam.so)
-PKG_DEPENDS_TARGET="Python3 setuptools:host linux-pam binutils"
+PKG_DEPENDS_TARGET="Python3 setuptools:host linux-pam binutils emulationstation retroarch"
 PKG_SHORTDESC="AmberELEC Web Interface"
 PKG_TOOLCHAIN="manual"
 

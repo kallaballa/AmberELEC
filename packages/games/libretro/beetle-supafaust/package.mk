@@ -7,7 +7,7 @@ PKG_VERSION="e25f66765938d33f9ad5850e8d6cd597e55b7299"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/supafaust"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="Super Nintendo (Super Famicom) emulator"
 PKG_TOOLCHAIN="make"
 

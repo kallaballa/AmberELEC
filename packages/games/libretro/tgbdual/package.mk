@@ -8,7 +8,7 @@ PKG_SHA256="c9286b91fd7840902075601749507e08f9e734aae5a9ccc37805324a348295c5"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/tgbdual-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="TGB Dual is an open source (GPLv2) GB/GBC emulator with game link cable support."
 PKG_TOOLCHAIN="make"
 

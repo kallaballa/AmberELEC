@@ -8,7 +8,7 @@ PKG_SHA256="5cac184772421ec3cffa19f50737a5fdd481089007d21d79b3e2760f94c8fa87"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/libretro-fceumm"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="FCEUX is a Nintendo Entertainment System (NES), Famicom, and Famicom Disk System (FDS) emulator."
 PKG_TOOLCHAIN="make"
 

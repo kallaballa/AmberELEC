@@ -8,7 +8,7 @@ PKG_SHA256="baa6d175d5197d171a13c66688006e11080c011bbb35646af063eae896c8bc29"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/pcsx_rearmed"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="ARM optimized PCSX fork"
 PKG_TOOLCHAIN="manual"
 

@@ -9,7 +9,7 @@ PKG_LICENSE="MIT"
 PKG_SITE="https://github.com/LIJI32/SameBoy"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
 PKG_GIT_CLONE_BRANCH="SameDuck"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="Mega Duck/Cougar Boy emulator written in C"
 PKG_TOOLCHAIN="make"
 

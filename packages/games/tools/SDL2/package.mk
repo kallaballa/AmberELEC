@@ -6,7 +6,7 @@ PKG_VERSION="2.30.4"
 PKG_LICENSE="GPL"
 PKG_SITE="https://www.libsdl.org/"
 PKG_URL="https://www.libsdl.org/release/SDL2-${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain alsa-lib systemd dbus pulseaudio libsamplerate weston librga xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr libXcursor"
+PKG_DEPENDS_TARGET="toolchain alsa-lib systemd dbus pulseaudio libsamplerate weston xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr libXcursor"
 PKG_DEPENDS_HOST="autotools:host distutilscross:host"
 PKG_LONGDESC="Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware."
 
@@ -17,7 +17,7 @@ PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} mesa"
 #fi
 
 pre_make_host() {
-  sed -i "s| -lrga||g" ${PKG_BUILD}/CMakeLists.txt
+#  sed -i "s| -lrga||g" ${PKG_BUILD}/CMakeLists.txt
   return 0;
 }
 
@@ -60,11 +60,11 @@ pre_configure_target(){
                          -DSDL_RENDER_D3D=OFF \
                          -DSDL_X11=ON \
                          -DSDL_OPENGLES=ON \
-			 -DSDL_OPENGL=ON \
+			 -DSDL_OPENGL=OFF \
                          -DSDL_VULKAN=OFF \
                          -DSDL_KMSDRM=OFF \
                          -DSDL_PULSEAUDIO=ON"
-  export LDFLAGS="${LDFLAGS} -lrga"
+#  export LDFLAGS="${LDFLAGS} -lrga"
 }
 
 post_makeinstall_target() {

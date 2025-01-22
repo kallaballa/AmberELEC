@@ -8,7 +8,7 @@ PKG_SHA256="6fda1a3ffc0d2faeebe27fae94e5b7790337dd96d1ea29922ad804a425d2852b"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/libretro/fuse-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="A port of the Fuse Unix Spectrum Emulator to libretro "
 PKG_TOOLCHAIN="make"
 

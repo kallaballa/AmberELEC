@@ -8,7 +8,7 @@ PKG_SHA256="14e19d8f2d9e464960ad504a4efb731ba63253c18be6bbfb33a6d70ce7d95d79"
 PKG_LICENSE="Non-commercial"
 PKG_SITE="https://github.com/libretro/fbalpha2012"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="Port of Final Burn Alpha 2012 to Libretro"
 PKG_TOOLCHAIN="make"
 

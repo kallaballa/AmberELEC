@@ -7,7 +7,7 @@ PKG_SHA256="e65dbc2af93d4996ad69368aca572dcedffbc0eea7516a5e2966a6b89d236752"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/TimOelrichs/doublecherryGB-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="libretro gameboy core with up to 16 players support"
 PKG_TOOLCHAIN="make"
 

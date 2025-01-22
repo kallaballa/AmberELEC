@@ -6,7 +6,7 @@ PKG_VERSION="70cd7965abe607a28ab3cee5689ed433d8f41da3"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/Zlika/theodore"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="Libretro core for Thomson MO/TO emulation / Core Libretro pour l'émulation des ordinateurs Thomson MO/TO."
 PKG_TOOLCHAIN="make"
 

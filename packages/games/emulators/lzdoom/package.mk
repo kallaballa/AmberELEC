@@ -6,7 +6,7 @@ PKG_VERSION="8e12e62164ea1ba52625c63bc0f1c9e0076bff4c"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/AmberELEC/lzdoom"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain SDL2 lzdoom:host"
+PKG_DEPENDS_TARGET="emulationstation toolchain SDL2 lzdoom:host"
 PKG_LONGDESC="ZDoom is a family of enhanced ports of the Doom engine for running on modern operating systems. It runs on Windows, Linux, and OS X, and adds new features not found in the games as originally published by id Software."
 PKG_TOOLCHAIN="cmake-make"
 

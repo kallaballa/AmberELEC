@@ -8,7 +8,7 @@ PKG_SHA256="c03c89d350ec4b2c73b61a517fb4450eccd2307961f30c3b94eefc14dfd855ef"
 PKG_LICENSE="Unknown"
 PKG_SITE="https://github.com/libretro/px68k-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="Portable SHARP X68000 Emulator for PSP, Android and other platforms"
 PKG_TOOLCHAIN="make"
 

@@ -8,7 +8,7 @@ PKG_SHA256="933fd83ad42ceb558c2ae9c0d2ea0a7bb68f05f8ab828951bcabfe400ce8c50f"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/libretro/libretro-uae"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="WIP libretro port of UAE (P-UAE and libco) Expect bugs"
 PKG_TOOLCHAIN="make"
 

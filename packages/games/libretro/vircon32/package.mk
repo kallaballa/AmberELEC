@@ -6,7 +6,7 @@ PKG_VERSION="9a44a83e5aaa82be7f1a127eb0c9ec0b287b58fa"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/vircon32/vircon32-libretro"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain mesa"
+PKG_DEPENDS_TARGET="retroarch toolchain mesa"
 PKG_LONGDESC="Vircon32 32-bit Virtual Console"
 PKG_TOOLCHAIN="cmake-make"
 

@@ -7,7 +7,7 @@ PKG_SHA256="051c962ebf1c5959a3622abba2f68156d65e57ed215cd798c7c834808cd27ece"
 PKG_ARCH="aarch64"
 PKG_SITE="https://github.com/icculus/mojozork"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="A simple Z-Machine implementation in a single C file"
 PKG_TOOLCHAIN="cmake"
 

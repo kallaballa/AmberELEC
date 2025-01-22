@@ -8,7 +8,7 @@ PKG_VERSION="$(get_pkg_version scummvm)"
 PKG_LICENSE="GPL2"
 PKG_SITE="https://github.com/scummvm/scummvm"
 PKG_URL=""
-PKG_DEPENDS_TARGET="toolchain SDL2 SDL2_net freetype fluidsynth libmad libtheora"
+PKG_DEPENDS_TARGET="emulationstation toolchain SDL2 SDL2_net freetype fluidsynth libmad libtheora"
 PKG_DEPENDS_UNPACK="scummvm"
 PKG_LONGDESC="ScummVM is a program which allows you to run certain classic graphical point-and-click adventure games, provided you already have their data files."
 

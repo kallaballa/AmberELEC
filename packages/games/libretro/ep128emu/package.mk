@@ -7,7 +7,7 @@ PKG_SHA256="5e559d10354522d6eb5934a8ca3a25d2ba6f82efd3d1efec47ff6b0176f181cb"
 PKG_ARCH="aarch64"
 PKG_SITE="https://github.com/libretro/ep128emu-core"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="Libretro core version of ep128emu"
 PKG_TOOLCHAIN="make"
 

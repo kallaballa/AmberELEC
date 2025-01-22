@@ -8,7 +8,7 @@ PKG_SHA256="ea2a0fe2a5061835a7c8d692e4f6b965f2a82660e027af759e3e963e2508cc43"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/beetle-lynx-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="libretro implementation of Mednafen Lynx"
 PKG_TOOLCHAIN="make"
 

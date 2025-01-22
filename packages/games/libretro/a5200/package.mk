@@ -6,7 +6,7 @@ PKG_VERSION="526404072821bb2021fab16f8c5dbbca300512c8"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/libretro/a5200"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="a5200 - Port of Atari 5200 emulator for GCW0"
 PKG_TOOLCHAIN="make"
 

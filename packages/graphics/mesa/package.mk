@@ -15,12 +15,12 @@ PKG_TOOLCHAIN="meson"
 
 get_graphicdrivers
 
-PKG_MESON_OPTS_TARGET="-Dgallium-drivers=panfrost,softpipe \
+PKG_MESON_OPTS_TARGET="-Dgallium-drivers=panfrost \
                        -Dshader-cache=true \
                        -Dshared-glapi=true \
 		       -Dtools=panfrost \
                        -Dopengl=true \
-                       -Dgbm=true \
+                       -Dgbm=false \
                        -Degl=true \
 		       -Degl-native-platform=wayland \
                        -Dglvnd=false \
@@ -30,7 +30,7 @@ PKG_MESON_OPTS_TARGET="-Dgallium-drivers=panfrost,softpipe \
                        -Dbuild-tests=false \
 		       -Dbuild-aco-tests=false \
                        -Dselinux=false \
-                       -Dosmesa=true \
+                       -Dosmesa=false \
 		       -Dgles1=true \
 		       -Dgles2=true \
 		       -Dvulkan-drivers=panfrost \

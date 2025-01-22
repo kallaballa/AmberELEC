@@ -8,7 +8,7 @@ PKG_SHA256="8f1153206479a25e925981076758698e0c5f6e7f826213b2b3598dc33a7d8ea0"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/beetle-pcfx-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="libretro implementation of Mednafen PC-FX."
 PKG_TOOLCHAIN="make"
 

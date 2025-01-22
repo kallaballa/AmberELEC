@@ -8,7 +8,7 @@ PKG_SHA256="baf8dc2e5039e5b15d8f061144e5ec02a73b0a5c8696c70cafd10bdf3d423b04"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/vbam-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="VBA-M is a [Super] Game Boy [Color / Advance] emulator for Windows, Linux & Mac."
 PKG_TOOLCHAIN="make"
 

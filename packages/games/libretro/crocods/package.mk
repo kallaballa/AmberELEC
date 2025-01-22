@@ -8,7 +8,7 @@ PKG_SHA256="b2fb689f0a2d3d0496ee11330ed0d086d09dcd8cde1bce34f46f8a1db89aabbf"
 PKG_LICENSE="MIT"
 PKG_SITE="https://github.com/libretro/libretro-crocods"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="Amstrad CPC emulator"
 PKG_TOOLCHAIN="make"
 

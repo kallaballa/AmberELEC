@@ -8,7 +8,7 @@ PKG_SHA256="ff2e71049b08c39ff6dc9185759b96e9a0dceea39d3750592226d29b0d0dfb3e"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/gpsp"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="gameplaySP is a Gameboy Advance emulator for Playstation Portable"
 PKG_TOOLCHAIN="make"
 

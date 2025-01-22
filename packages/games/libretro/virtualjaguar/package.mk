@@ -8,7 +8,7 @@ PKG_SHA256="2192ff7d093a76420b5dea2c694e7681ec6d388f7dd5b3df62ddec5a700afbe2"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/libretro/virtualjaguar-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="Port of Virtual Jaguar to Libretro"
 PKG_TOOLCHAIN="make"
 

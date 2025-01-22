@@ -8,7 +8,7 @@ PKG_SHA256="3a2e3c564156a7e18b15b8ac04fc5aa10da3f44d8253a073cc42fdd74a1a48de"
 PKG_LICENSE="LGPLv2.1+"
 PKG_SITE="https://github.com/libretro/QuickNES_Core"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="The QuickNES core library, originally by Shay Green, heavily modified"
 PKG_TOOLCHAIN="make"
 

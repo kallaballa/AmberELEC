@@ -8,7 +8,7 @@ PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/easyrpg/player"
 PKG_URL="${PKG_SITE}.git"
 PKG_GIT_CLONE_BRANCH="0-8-0-stable"
-PKG_DEPENDS_TARGET="toolchain zlib libfmt liblcf pixman speexdsp mpg123 libsndfile libvorbis opusfile wildmidi libxmp-lite fluidsynth harfbuzz libpng"
+PKG_DEPENDS_TARGET="retroarch toolchain zlib libfmt liblcf pixman speexdsp mpg123 libsndfile libvorbis opusfile wildmidi libxmp-lite fluidsynth harfbuzz libpng"
 PKG_LONGDESC="An unofficial libretro port of the EasyRPG/Player."
 PKG_BUILD_FLAGS="+pic"
 

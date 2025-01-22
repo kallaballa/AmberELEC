@@ -8,7 +8,7 @@ PKG_SHA256="8fb238286a00eede32bc05808caf062134d561dd3e808a881e33fa80aefeb09a"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/libretro/FreeIntv"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="FreeIntv is a libretro emulation core for the Mattel Intellivision."
 PKG_TOOLCHAIN="make"
 

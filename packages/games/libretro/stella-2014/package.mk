@@ -8,7 +8,7 @@ PKG_SHA256="dd4e8732dfa9017543ac00c0af6c013500734d4d44bee652c43fe67393a6422b"
 PKG_LICENSE="GPL2"
 PKG_SITE="https://github.com/libretro/stella2014-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="Stella is a multi-platform Atari 2600 VCS emulator released under the GNU General Public License (GPL)."
 PKG_TOOLCHAIN="make"
 

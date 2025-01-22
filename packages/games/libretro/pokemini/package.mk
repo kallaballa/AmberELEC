@@ -8,7 +8,7 @@ PKG_SHA256="ded9849c2bc8c3b9ca363202324760f4d967f1536eb557364ef94e757fa675d2"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/libretro/pokemini"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="Obscure nintendo handheld emulator (functional,no color files or savestates currently)"
 PKG_TOOLCHAIN="make"
 

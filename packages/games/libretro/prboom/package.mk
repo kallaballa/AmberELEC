@@ -8,7 +8,7 @@ PKG_SHA256="b22b6449a6c8219a70abb13cc3b1170debe16eea076c907ad8c60f33f1e5b7d4"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/libretro-prboom"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="libretro implementation of Doom"
 PKG_TOOLCHAIN="make"
 

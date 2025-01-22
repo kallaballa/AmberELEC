@@ -8,7 +8,7 @@ PKG_SHA256="33ef14eb0141e98323cc8c3e997f668df348fea7b7bf5a97766c2c91af075fa7"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/beetle-gba-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="libretro implementation of Mednafen VBA/GBA. (Game Boy Advance)"
 PKG_TOOLCHAIN="make"
 

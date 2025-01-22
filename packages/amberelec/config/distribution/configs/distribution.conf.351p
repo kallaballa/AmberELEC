@@ -10,7 +10,7 @@ ee_syncting.enabled=0
 ee_samba.enabled=1
 
 ## Enable Bluetooth at boot
-ee_bluetooth.enabled=0
+ee_bluetooth.enabled=1
 
 ## Use maxperf, enable max settings for GPU and performance governer, this setting can be set globally, per platform or per game on the ES menu
 global.maxperf=0
@@ -47,16 +47,16 @@ advmame_auto_gamepad=0
 
 # ------------ B - Network ------------ #
 ## Set system hostname
-system.hostname=AmberELEC
+system.hostname=NixELEC
 ## Activate wifi (0,1)
-wifi.enabled=0
+wifi.enabled=1
 ## Wifi SSID (string)
-#wifi.ssid=
+wifi.ssid=sunshine
 ## Wifi KEY (string)
 ## after rebooting the "new key" is replace by a hidden value "enc:xxxxx"
 ## you can edit the "enc:xxxxx" value to replace by a clear value, it will be updated again at the following reboot
 ## Escape your special chars (# ; $) with a backslash : $ => \$
-#wifi.key=
+wifi.key=moonlight
 
 # secondary wifi (not configurable via the user interface)
 #wifi2.ssid=new ssid

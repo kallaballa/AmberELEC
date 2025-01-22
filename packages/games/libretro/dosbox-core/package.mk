@@ -7,7 +7,7 @@ PKG_SHA256="d5821349004c90f87d2b80525d94bb69624d0a587778483ae7c0b0b8187bae3b"
 PKG_ARCH="aarch64"
 PKG_SITE="https://github.com/realnc/dosbox-core"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain munt flac fluidsynth libsndfile mpg123 libvorbis libogg opus opusfile alsa-lib SDL_net"
+PKG_DEPENDS_TARGET="retroarch toolchain munt flac fluidsynth libsndfile mpg123 libvorbis libogg opus opusfile alsa-lib SDL_net"
 PKG_LONGDESC="A DOSBox core for use in RetroArch and other libretro frontends."
 PKG_TOOLCHAIN="make"
 

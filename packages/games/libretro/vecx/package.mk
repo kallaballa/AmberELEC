@@ -8,7 +8,7 @@ PKG_SHA256="55327ad4494b64f6f64319904417e47f353f06ed8930e8d4cce2eee6f30500d7"
 PKG_LICENSE="GPLv2|LGPLv2.1"
 PKG_SITE="https://github.com/libretro/libretro-vecx"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="libretro adaptation of vecx"
 PKG_TOOLCHAIN="make"
 

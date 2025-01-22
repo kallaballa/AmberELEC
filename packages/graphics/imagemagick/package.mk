@@ -6,7 +6,7 @@ PKG_VERSION="7.1.1-29"
 PKG_LICENSE="http://www.imagemagick.org/script/license.php"
 PKG_SITE="http://www.imagemagick.org/"
 PKG_URL="https://github.com/ImageMagick/ImageMagick/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain libpng libjpeg-turbo fontconfig libraw lcms2 libtool libxml2 libzip libwebp"
+PKG_DEPENDS_TARGET="toolchain libpng libjpeg-turbo fontconfig libraw lcms2 libtool libxml2 libzip libwebp xz"
 PKG_LONGDESC="Software suite to create, edit, compose, or convert bitmap images"
 
 pre_configure_target() {

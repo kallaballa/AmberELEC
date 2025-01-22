@@ -8,7 +8,7 @@ PKG_SHA256="eadbad9e9ab30b25f5520fbfde99fae4a92a1ae3c0257a8d68569a4651e30e02"
 PKG_LICENSE="GPL-3.0"
 PKG_SITE="https://github.com/nyanmisaka/ffmpeg-rockchip/"
 PKG_URL="http://ffmpeg.org/releases/ffmpeg-${PKG_VERSION}.tar.xz"
-PKG_DEPENDS_TARGET="toolchain zlib bzip2 openssl speex rkmpp libdrm mesa SDL SDL2 waf:host aom dav1d libaacs libamcodec libass libbdplus libbluray libdvbpsi libdvdcss libdvdnav libdvdread libhdhomerun libmpeg2 libva libvdpau rtmpdump x264 openal-soft librga"
+PKG_DEPENDS_TARGET="toolchain zlib bzip2 openssl speex rkmpp mesa waf:host aom dav1d libaacs libamcodec libass libbdplus libbluray libdvbpsi libdvdcss libdvdnav libdvdread libhdhomerun libmpeg2 libva libvdpau rtmpdump x264 openal-soft gmp libgcrypt libopenjpeg pulseaudio"
 PKG_LONGDESC="FFmpeg is a complete, cross-platform solution to record, convert and stream audio and video."
 #PKG_PATCH_DIRS="libreelec v4l2-request v4l2-drmprime"
 
@@ -19,9 +19,9 @@ post_unpack() {
 # Dependencies
 get_graphicdrivers
 
-  PKG_FFMPEG_HWACCEL="--enable-opengl --enable-hwaccels --enable-rkmpp --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libass --enable-gcrypt --enable-gmp --enable-libaom --enable-libbluray --enable-libdav1d --enable-libopenjpeg --enable-libopus --enable-libpulse --enable-libxcb  --enable-libxcb-shm --enable-openal --enable-libdrm"
-  PKG_NEED_UNPACK+=" $(get_pkg_directory libdrm)"
-  PKG_FFMPEG_V4L2="--enable-v4l2_m2m --enable-libdrm"
+  PKG_FFMPEG_HWACCEL="--enable-opengl --enable-hwaccels --enable-rkmpp --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libass --enable-gcrypt --enable-gmp --enable-libaom --enable-libbluray --enable-libdav1d --enable-libopus --enable-libpulse --enable-libxcb  --enable-libxcb-shm --enable-openal"
+#  PKG_NEED_UNPACK+=" $(get_pkg_directory libdrm)"
+#  PKG_FFMPEG_V4L2="--enable-v4l2_m2m --enable-libdrm"
 
   PKG_DEPENDS_TARGET+=" systemd"
   PKG_NEED_UNPACK+=" $(get_pkg_directory systemd)"
@@ -164,15 +164,11 @@ configure_target() {
               --disable-libfreetype \
               --disable-libgsm \
               --disable-libmp3lame \
-              --disable-libopenjpeg \
+              --enable-libopenjpeg \
               --disable-librtmp \
               ${PKG_FFMPEG_AV1} \
               --enable-libspeex \
-              --disable-libtheora \
               --disable-libvo-amrwbenc \
-              --disable-libvorbis \
-              --disable-libvpx \
-              --disable-libx264 \
               --disable-libxavs \
               --disable-libxvid \
               --enable-zlib \

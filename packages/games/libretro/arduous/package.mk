@@ -6,7 +6,7 @@ PKG_VERSION="2273b485628790a2ce954941341b5b071c3fb30e"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/libretro/arduous"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="retroarch toolchain"
 PKG_LONGDESC="arduous for libretro"
 PKG_TOOLCHAIN="cmake-make"
 
