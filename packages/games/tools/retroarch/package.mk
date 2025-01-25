@@ -2,20 +2,20 @@
 # Copyright (C) 2021-present AmberELEC (https://github.com/AmberELEC)
 
 PKG_NAME="retroarch"
-PKG_VERSION="0792144fe3a7b59908b0afdb2c01722e79040360"
+PKG_VERSION="1.2.0"
 PKG_SITE="https://github.com/libretro/RetroArch"
-PKG_URL="${PKG_SITE}.git"
+PKG_URL="https://github.com/libretro/RetroArch/archive/refs/tags/v1.20.0.tar.gz"
 PKG_LICENSE="GPLv3"
-PKG_DEPENDS_TARGET="toolchain SDL2 alsa-lib openssl freetype zlib retroarch-assets core-info ffmpeg libass joyutils empty nss-mdns openal-soft libogg libvorbis libvorbisidec libvpx libpng pulseaudio xwayland"
+PKG_DEPENDS_TARGET="toolchain SDL2 alsa-lib openssl freetype zlib retroarch-assets core-info ffmpeg libass joyutils empty nss-mdns openal-soft libogg libvorbis libvorbisidec libvpx libpng pulseaudio weston"
 PKG_LONGDESC="Reference frontend for the libretro API."
 
-if [[ "${DEVICE}" =~ RG351 ]]; then
-  PKG_PATCH_DIRS="RG351-ui-patches"
-fi
+#if [[ "${DEVICE}" =~ RG351 ]]; then
+#  PKG_PATCH_DIRS="RG351-ui-patches"
+#fi
 
-if [[ "${DEVICE}" == RG552 ]]; then
-  PKG_PATCH_DIRS="RG552-ui-patches"
-fi
+#if [[ "${DEVICE}" == RG552 ]]; then
+#  PKG_PATCH_DIRS="RG552-ui-patches"
+#fi
 
 pre_configure_target() {
   TARGET_CONFIGURE_OPTS=""
@@ -30,6 +30,7 @@ pre_configure_target() {
                              --disable-vulkan_display \
                              --enable-egl \
 			     --enable-dynamic_egl \
+			     --enable-glx \
 			     --enable-bluetooth \
                              --disable-opengles \
                              --enable-wayland \

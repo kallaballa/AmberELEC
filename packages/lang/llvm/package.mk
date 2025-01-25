@@ -3,70 +3,35 @@
 # Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="llvm"
-PKG_VERSION="13.0.0"
+PKG_VERSION="e21dc4bd5474d04b8e62d7331362edcc5648d7e5"
 PKG_SHA256="408d11708643ea826f519ff79761fcdfc12d641a2510229eec459e72f8163020"
-PKG_ARCH="x86_64"
+PKG_GIT_CLONE_BRANCH="llvmorg-19.1.6"
+PKG_GIT_CLONE_SINGLE=yes
 PKG_LICENSE="Apache-2.0"
 PKG_SITE="http://llvm.org/"
-PKG_URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-${PKG_VERSION}/llvm-${PKG_VERSION}.src.tar.xz"
-PKG_DEPENDS_HOST="toolchain:host"
-PKG_DEPENDS_TARGET="toolchain llvm:host zlib"
+PKG_URL="https://github.com/llvm/llvm-project.git"
+PKG_DEPENDS_HOST="toolchain:host zlib:host"
+PKG_DEPENDS_TARGET="toolchain zlib llvm:host"
 PKG_LONGDESC="Low-Level Virtual Machine (LLVM) is a compiler infrastructure."
+PKG_TOOLCHAIN="cmake"
+PKG_CMAKE_OPTS_HOST="-DLLVM_TARGETS_TO_BUILD=AArch64 -DLLVM_ENABLE_PROJECTS=llvm;clang -DLLVM_INSTALL_UTILS=ON"
+PKG_CMAKE_OPTS_TARGET="-DLLVM_TARGETS_TO_BUILD=AArch64 -DLLVM_ENABLE_PROJECTS=clang;libclc -DLLVM_INSTALL_UTILS=ON"
+PKG_BUILD_FLAGS="+local-cc"
 
-PKG_CMAKE_OPTS_COMMON="-DLLVM_INCLUDE_TOOLS=ON \
-                       -DLLVM_BUILD_TOOLS=OFF \
-                       -DLLVM_BUILD_UTILS=OFF \
-                       -DLLVM_BUILD_EXAMPLES=OFF \
-                       -DLLVM_INCLUDE_EXAMPLES=OFF \
-                       -DLLVM_BUILD_TESTS=OFF \
-                       -DLLVM_INCLUDE_TESTS=OFF \
-                       -DLLVM_INCLUDE_GO_TESTS=OFF \
-                       -DLLVM_BUILD_BENCHMARKS=OFF \
-                       -DLLVM_BUILD_DOCS=OFF \
-                       -DLLVM_INCLUDE_DOCS=OFF \
-                       -DLLVM_ENABLE_DOXYGEN=OFF \
-                       -DLLVM_ENABLE_SPHINX=OFF \
-                       -DLLVM_ENABLE_OCAMLDOC=OFF \
-                       -DLLVM_ENABLE_BINDINGS=OFF \
-                       -DLLVM_TARGETS_TO_BUILD=AMDGPU \
-                       -DLLVM_ENABLE_TERMINFO=OFF \
-                       -DLLVM_ENABLE_ASSERTIONS=OFF \
-                       -DLLVM_ENABLE_WERROR=OFF \
-                       -DLLVM_ENABLE_ZLIB=ON \
-                       -DLLVM_ENABLE_LIBXML2=OFF \
-                       -DLLVM_BUILD_LLVM_DYLIB=ON \
-                       -DLLVM_LINK_LLVM_DYLIB=ON \
-                       -DLLVM_OPTIMIZED_TABLEGEN=ON \
-                       -DLLVM_APPEND_VC_REV=OFF \
-                       -DLLVM_ENABLE_RTTI=ON \
-                       -DLLVM_ENABLE_UNWIND_TABLES=OFF \
-                       -DLLVM_ENABLE_Z3_SOLVER=OFF"
-
-pre_configure_host() {
-  CXXFLAGS+=" -DLLVM_CONFIG_EXEC_PREFIX=\\\"${SYSROOT_PREFIX}/usr\\\""
-  PKG_CMAKE_OPTS_HOST="${PKG_CMAKE_OPTS_COMMON}"
+configure_host() {
+  CXXFLAGS+=" -DLLVM_CONFIG_EXEC_PREFIX=\\\"${SYSROOT_PREFIX}\\\""
+  cmake -S llvm -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=${SYSROOT_PREFIX}/usr ${PKG_CMAKE_OPTS_TARGET}
 }
 
-pre_configure_target() {
-  PKG_CMAKE_OPTS_TARGET="${PKG_CMAKE_OPTS_COMMON} \
-                         -DLLVM_TARGET_ARCH="${TARGET_ARCH}" \
-                         -DLLVM_TABLEGEN=${TOOLCHAIN}/bin/llvm-tblgen"
-}
-
-make_host() {
-  ninja ${NINJA_OPTS} llvm-config llvm-tblgen
+configure_target() {
+  CXXFLAGS+=" -DLLVM_CONFIG_EXEC_PREFIX=\\\"${SYSROOT_PREFIX}\\\""
+  cmake -S llvm -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=${SYSROOT_PREFIX}/usr ${PKG_CMAKE_OPTS_TARGET}
 }
 
 makeinstall_host() {
-  cp -a lib/libLLVM-*.so ${TOOLCHAIN}/lib
-  cp -a bin/llvm-config ${TOOLCHAIN}/bin/llvm-config-host
-  cp -a bin/llvm-tblgen ${TOOLCHAIN}/bin
+  ninja ${NINJA_OPTS} install
 }
 
-post_makeinstall_target() {
-#  rm -rf ${INSTALL}/usr/bin
-#  rm -rf ${INSTALL}/usr/lib/LLVMHello.so
-#  rm -rf ${INSTALL}/usr/lib/libLTO.so
-#  rm -rf ${INSTALL}/usr/share
-return 0;
+makeinstall_target() {
+  ninja ${NINJA_OPTS} install
 }

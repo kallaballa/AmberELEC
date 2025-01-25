@@ -440,7 +440,7 @@ cpp = '$CXX'
 ar = '$AR'
 strip = '$STRIP'
 pkg-config = '$PKG_CONFIG'
-llvm-config = '$SYSROOT_PREFIX/usr/bin/llvm-config-host'
+llvm-config = '$SYSROOT_PREFIX/usr/bin/llvm-config'
 
 [host_machine]
 system = 'linux'

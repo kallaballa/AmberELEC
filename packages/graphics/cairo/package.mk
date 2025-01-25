@@ -7,12 +7,11 @@ PKG_SHA256="7e87878658f2c9951a14fc64114d4958c0e65ac47530b8ac3078b2ce41b66a09"
 PKG_LICENSE="LGPL"
 PKG_SITE="http://cairographics.org/"
 PKG_URL="http://cairographics.org/releases/${PKG_NAME}-${PKG_VERSION}.tar.xz"
-PKG_DEPENDS_TARGET="toolchain zlib freetype fontconfig glib libpng pixman libxcb xwayland"
+PKG_DEPENDS_TARGET="toolchain zlib freetype fontconfig glib libpng pixman xwayland"
 PKG_LONGDESC="Cairo is a vector graphics library with cross-device output support."
 PKG_TOOLCHAIN="configure" # ToDo
 
 
-  PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} libXrender libX11"
   PKG_CAIRO_CONFIG="--x-includes="${SYSROOT_PREFIX}/usr/include" \
                     --x-libraries="${SYSROOT_PREFIX}/usr/lib" \
                     --enable-xlib \

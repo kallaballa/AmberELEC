@@ -43,7 +43,7 @@
     UBOOT_SYSTEM="rg351p"
 
   # additional packages to install
-    ADDITIONAL_PACKAGES="amberelec weston util-linux dtc nix"
+    ADDITIONAL_PACKAGES="amberelec weston dtc nix"
 
   # additional drivers to install:
   # for a list of additional drivers see packages/linux-drivers

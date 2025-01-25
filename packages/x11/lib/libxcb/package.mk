@@ -15,6 +15,7 @@ PKG_CONFIGURE_OPTS_TARGET="--disable-static \
                            --enable-shared \
                            --disable-screensaver \
                            --disable-xprint \
+			   --enable-glx \
                            --disable-selinux \
                            --disable-xvmc"
 
